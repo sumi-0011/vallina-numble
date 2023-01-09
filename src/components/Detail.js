@@ -5,17 +5,23 @@ function Detail({ $target, initialState }) {
   this.state = initialState;
 
   this.render = () => {
+    const { title, postId, content, createdAt, image, updatedAt } =
+      this.state.post;
+
     $detail.innerHTML = `
-        <div class="detail__img"></div>
+        <div class="detail__img">
+          <img src="${image}" />
+        </div>
         <div class="detail__wrapper">
           <div class="detail__top">
-            <h2 class="detail__title">신년계획</h2>
-            <span class="detail__date"></span>
+            <h2 class="detail__title">${title}</h2>
+            <span class="detail__date">${createdAt}</span>
           </div>
-          <div class="detail__content"></div>
+          <div class="detail__content">${content}</div>
           <div class="detail__bottom"></div>
         </div>
     `;
+
     $target.appendChild($detail);
   };
 
