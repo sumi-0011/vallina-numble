@@ -8,10 +8,9 @@ function App({ $target }) {
     const { pathname } = location;
 
     $target.innerHTML = ` 
-      <div>
         <header></header>
         <div class='content'></div>
-      </div>`;
+   `;
 
     const $content = $target.querySelector('.content');
 

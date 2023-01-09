@@ -2,11 +2,22 @@
   box-sizing: border-box;
 }
 
-#app {
-  width: 360px;
-  margin: auto;
-  padding: 18px;
+html,
+body {
+  margin: 0;
+}
+hr {
+  width: 100%;
 }
 
-.divider {
+#app {
+  width: 360px;
+  height: 100vh;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 18px;
+
+  .content {
+    height: 100%;
+  }
 }
