@@ -3,7 +3,7 @@ function Writing({ $target }) {
 
   const $page = document.createElement('div');
   $page.className = 'Writing';
-  $page.innerHTML = '';
+  $page.innerHTML = '<h1>Writing</h1>';
 
   this.render = () => {
     $target.appendChild($page);

@@ -2,6 +2,7 @@ import { request } from '../api';
 import IconButton from '../components/IconButton';
 import Post from '../components/Post';
 import '../css/home.scss';
+import { routeChange } from '../router';
 
 function Home({ $target, initialState }) {
   this.state = initialState;
@@ -21,8 +22,9 @@ function Home({ $target, initialState }) {
   };
 
   const newPostBtnClick = () => {
-    console.log('새 글 작성하기 ');
+    routeChange('/write');
   };
+
   this.render = () => {
     if (!this.state?.posts) {
       return;
