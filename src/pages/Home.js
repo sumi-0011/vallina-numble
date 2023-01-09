@@ -1,5 +1,6 @@
 import { request } from '../api';
-import Post from '../components/post';
+import IconButton from '../components/IconButton';
+import Post from '../components/Post';
 
 function Home({ $target, initialState }) {
   this.state = initialState;
@@ -18,14 +19,27 @@ function Home({ $target, initialState }) {
     this.render();
   };
 
+  const renderButton = () => {
+    const $button = new IconButton({
+      name: '새 글 작성하기',
+    });
+
+    $page.appendChild($button);
+  };
+
+  const renderPostList = () => {
+    this.state.posts.map((post) => {
+      const $post = new Post(post);
+      $page.appendChild($post);
+    });
+  };
+
   this.render = () => {
     if (!this.state?.posts) {
       return;
     }
-    this.state.posts.map((post) => {
-      const $post = new Post({ $target: $page, post });
-      $page.appendChild($post);
-    });
+    renderButton();
+    renderPostList();
   };
   fetchPosts();
 }

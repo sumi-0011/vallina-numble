@@ -1,6 +1,6 @@
 import '../css/home.scss';
 
-function Post({ $target, post }) {
+function Post(post) {
   const { postId, image, title, content } = post;
 
   const $post = document.createElement('div');
@@ -17,9 +17,9 @@ function Post({ $target, post }) {
     </div>
   `;
 
-  this.render = () => {
-    $target.appendChild($post);
-  };
+  // this.render = () => {
+  //   $target.appendChild($post);
+  // };
 
   return $post;
 }
