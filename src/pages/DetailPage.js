@@ -33,6 +33,7 @@ function DetailPage({ $target, postId }) {
 
     $page.innerHTML = `
       <div class="detail-wrapper"></div>
+      <hr/>
       <div class="comment-list"></div>
     `;
 

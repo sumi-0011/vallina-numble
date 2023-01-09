@@ -40,3 +40,38 @@
   width: 40px;
   height: 40px;
 }
+
+.comment-list {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  &__content {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #454545;
+  }
+
+  &__delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    border: 1px solid #e2e2e2;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+  }
+}

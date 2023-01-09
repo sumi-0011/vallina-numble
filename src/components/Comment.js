@@ -1,3 +1,5 @@
+import XIcon from './icons/XIcon';
+
 function Comment({ $target, initialState }) {
   const $comment = document.createElement('div');
   $comment.className = 'comment';
@@ -17,8 +19,10 @@ function Comment({ $target, initialState }) {
 
     $comment.innerHTML = `
       <div class="comment__content">${content}</div>
-      <button class="comment__delete-btn">x</button>
+      <button class="comment__delete-btn"></button>
     `;
+
+    new XIcon({ $target: $comment.querySelector('.comment__delete-btn') });
   };
 
   this.render();
