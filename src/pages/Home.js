@@ -1,14 +1,16 @@
 import { request } from '../api';
+import { routeChange } from '../router';
 import IconButton from '../components/IconButton';
 import Post from '../components/Post';
 import '../css/home.scss';
-import { routeChange } from '../router';
 
 function Home({ $target, initialState }) {
   this.state = initialState;
 
   const $page = document.createElement('div');
   $target.appendChild($page);
+
+  const $content = document.createElement('div');
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -33,7 +35,6 @@ function Home({ $target, initialState }) {
     $page.innerHTML = `
       <div class="button-container"></div>
       <div class="post-list"></div>
-      
     `;
 
     new IconButton({
