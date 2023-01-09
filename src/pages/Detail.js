@@ -1,9 +1,9 @@
-function Detail({ $target }) {
+function Detail({ $target, postId }) {
   this.state = {};
 
   const $page = document.createElement('div');
   $page.className = 'Detail';
-  $page.innerHTML = '';
+  $page.innerHTML = `<h1>Detail ${postId}</h1>`;
 
   this.render = () => {
     $target.appendChild($page);

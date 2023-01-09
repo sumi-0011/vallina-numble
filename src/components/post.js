@@ -1,4 +1,5 @@
 import '../css/post.scss';
+import { routeChange } from '../router';
 
 function Post({ $target, initialState }) {
   const $post = document.createElement('div');
@@ -25,6 +26,13 @@ function Post({ $target, initialState }) {
   };
 
   this.render();
+
+  $post.addEventListener('click', () => {
+    const { postId } = this.state.post;
+    console.log('post click', postId);
+
+    routeChange(`/post/${postId}`);
+  });
 }
 
 export default Post;

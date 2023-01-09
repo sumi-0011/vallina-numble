@@ -20,19 +20,25 @@ function Home({ $target, initialState }) {
     this.render();
   };
 
+  const newPostBtnClick = () => {
+    console.log('새 글 작성하기 ');
+  };
   this.render = () => {
     if (!this.state?.posts) {
       return;
     }
+
     $page.innerHTML = `
       <div class="button-container"></div>
       <div class="post-list"></div>
       
     `;
+
     new IconButton({
       $target: $page.querySelector('.button-container'),
       initialState: {
         name: '새 글 작성하기',
+        onClick: newPostBtnClick,
       },
     });
 
