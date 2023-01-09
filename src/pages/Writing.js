@@ -1,13 +1,13 @@
-function Home({ $target }) {
+function Writing({ $target }) {
   this.state = {};
 
   const $page = document.createElement('div');
-  $page.className = 'Home';
-  $page.innerHTML = '<h1>home</h1>';
+  $page.className = 'Writing';
+  $page.innerHTML = '';
 
   this.render = () => {
     $target.appendChild($page);
   };
 }
 
-export default Home;
+export default Writing;
