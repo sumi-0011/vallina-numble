@@ -1,4 +1,5 @@
 import { request } from '../api';
+import Post from '../components/post';
 
 function Home({ $target, initialState }) {
   this.state = initialState;
@@ -17,19 +18,14 @@ function Home({ $target, initialState }) {
     this.render();
   };
 
-  const renderPost = ({ title, content, postId }) => {
-    return `<div class="post" data-id="${postId}">
-        <div class="post__title">${title}</div>
-        <div class="post__content">${content}</div>
-      </div>`;
-  };
   this.render = () => {
     if (!this.state?.posts) {
       return;
     }
-    $page.innerHTML = `
-      ${this.state.posts.map((post) => renderPost(post)).join('')}
-    `;
+    this.state.posts.map((post) => {
+      const $post = new Post({ $target: $page, post });
+      $page.appendChild($post);
+    });
   };
   fetchPosts();
 }

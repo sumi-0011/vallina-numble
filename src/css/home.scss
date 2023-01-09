@@ -1,0 +1,19 @@
+.post {
+  display: flex;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5px 16px;
+  height: 76px;
+
+  &__img {
+    img {
+      width: 76px;
+      height: 76px;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+}
