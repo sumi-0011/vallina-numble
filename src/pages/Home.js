@@ -1,6 +1,6 @@
 import { request } from '../api';
 import { routeChange } from '../router';
-import IconButton from '../components/IconButton';
+import IconTextButton from '../components/IconTextButton';
 import Post from '../components/Post';
 import '../css/home.scss';
 

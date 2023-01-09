@@ -1,3 +1,6 @@
+import '../css/detail.scss';
+import IconButton from '../components/IconButton';
+
 function Detail({ $target, initialState }) {
   const $detail = document.createElement('div');
   $detail.className = 'detail';
@@ -21,7 +24,18 @@ function Detail({ $target, initialState }) {
           <div class="detail__bottom"></div>
         </div>
     `;
-
+    new IconButton({
+      $target: $detail.querySelector('.detail__bottom'),
+      initialState: {
+        iconName: 'modify',
+      },
+    });
+    new IconButton({
+      $target: $detail.querySelector('.detail__bottom'),
+      initialState: {
+        iconName: 'delete',
+      },
+    });
     $target.appendChild($detail);
   };
 

@@ -15,14 +15,14 @@ function Post({ $target, initialState }) {
     const { postId, image, title, content } = this.state.post;
     $post.dataset.id = postId;
     $post.innerHTML = `
-    <div class="post__img">
-      <img src="${image}" />
-    </div>
-    <div class="post__inner">
-      <div class="post__title">${title}</div>
-      <div class="post__content">${content}</div>
-    </div>
-  `;
+      <div class="post__img">
+        <img src="${image}" />
+      </div>
+      <div class="post__inner">
+        <div class="post__title">${title}</div>
+        <div class="post__content">${content}</div>
+      </div>
+    `;
   };
 
   this.render();
