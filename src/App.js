@@ -1,6 +1,6 @@
 import Home from './pages/Home';
-import Detail from './pages/Detail';
-import Writing from './pages/Writing';
+import DetailPage from './pages/DetailPage';
+import WritingPage from './pages/WritingPage';
 import { init } from './router';
 
 function App({ $target }) {
@@ -19,9 +19,9 @@ function App({ $target }) {
       new Home({ $target: $content }).render();
     } else if (pathname.indexOf('post') === 1) {
       const [, , postId] = pathname.split('/');
-      new Detail({ $target: $content, postId }).render();
+      new DetailPage({ $target: $content, postId }).render();
     } else if (pathname === '/write') {
-      new Writing({ $target: $content }).render();
+      new WritingPage({ $target: $content }).render();
     }
   };
 
