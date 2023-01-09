@@ -1,14 +1,22 @@
 import '../css/button.scss';
 
-function Button({ name, onClick }) {
-  this.state = {};
-
+function Button({ $target, initialState }) {
   const $button = document.createElement('button');
-  $button.className = 'button';
-  $button.textContent = name;
-  $button.addEventListener('click', onClick);
+  $target.appendChild($button);
+  this.state = initialState;
 
-  return $button;
+  this.render = () => {
+    if (!this.state.name) {
+      return;
+    }
+
+    const { name } = this.state;
+    $button.className = 'button';
+    $button.textContent = name;
+  };
+
+  $button.addEventListener('click', this.state.onClick);
+  this.render();
 }
 
 export default Button;

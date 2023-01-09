@@ -1,19 +1,9 @@
-.post {
-  display: flex;
-  border: 1px solid #e2e2e2;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 12px 0;
-  height: 76px;
+.button-container {
+  margin: 20px 0;
+}
 
-  &__img {
-    img {
-      width: 76px;
-      height: 76px;
-    }
-  }
-
-  &__title {
-    font-weight: bold;
+.post-list {
+  .post {
+    margin: 12px 0;
   }
 }

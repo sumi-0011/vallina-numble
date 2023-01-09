@@ -1,27 +1,30 @@
-import '../css/home.scss';
+import '../css/post.scss';
 
-function Post(post) {
-  const { postId, image, title, content } = post;
-
+function Post({ $target, initialState }) {
   const $post = document.createElement('div');
-
   $post.className = 'post';
-  $post.dataset.id = postId;
-  $post.innerHTML = `
+
+  $target.appendChild($post);
+
+  this.state = initialState;
+
+  this.render = () => {
+    if (!this.state.post) return;
+
+    const { postId, image, title, content } = this.state.post;
+    $post.dataset.id = postId;
+    $post.innerHTML = `
     <div class="post__img">
       <img src="${image}" />
     </div>
-    <div>
+    <div class="post__inner">
       <div class="post__title">${title}</div>
       <div class="post__content">${content}</div>
     </div>
   `;
+  };
 
-  // this.render = () => {
-  //   $target.appendChild($post);
-  // };
-
-  return $post;
+  this.render();
 }
 
 export default Post;

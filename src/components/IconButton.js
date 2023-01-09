@@ -1,18 +1,29 @@
 import Button from './Button';
 
-function IconButton({ icon, name, onClick }) {
+function IconButton({ initialState, $target }) {
   const $wrapper = document.createElement('div');
+  $target.appendChild($wrapper);
+
+  this.state = initialState;
+
   $wrapper.className = 'icon-button';
 
-  const $btn = new Button({ name, onClick });
-  $wrapper.appendChild($btn);
+  this.render = () => {
+    if (!this.state) {
+      return;
+    }
 
-  return $wrapper;
-  // $page.innerHTML = ``;
+    const { icon, name, onClick } = this.state;
+    new Button({
+      $target: $wrapper,
+      initialState: {
+        name,
+        onClick,
+      },
+    });
+  };
 
-  // this.render = () => {
-  //   $target.appendChild($wrapper);
-  // };
+  this.render();
 }
 
 export default IconButton;
