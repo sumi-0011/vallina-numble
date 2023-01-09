@@ -1,12 +1,12 @@
 import Button from './Button';
 
-function IconButton({ initialState, $target }) {
+function IconTextButton({ initialState, $target }) {
   const $wrapper = document.createElement('div');
   $target.appendChild($wrapper);
 
   this.state = initialState;
 
-  $wrapper.className = 'icon-button';
+  $wrapper.className = 'icon-text-button';
 
   this.render = () => {
     if (!this.state) {
@@ -26,4 +26,4 @@ function IconButton({ initialState, $target }) {
   this.render();
 }
 
-export default IconButton;
+export default IconTextButton;

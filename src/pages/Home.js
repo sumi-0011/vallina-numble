@@ -37,7 +37,7 @@ function Home({ $target, initialState }) {
       <div class="post-list"></div>
     `;
 
-    new IconButton({
+    new IconTextButton({
       $target: $page.querySelector('.button-container'),
       initialState: {
         name: '새 글 작성하기',
