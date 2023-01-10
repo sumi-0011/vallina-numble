@@ -15,11 +15,30 @@ const getPostList = async () => {
 const addPost = async (title, content, image) => {
   image = `https://img.freepik.com/premium-photo/small-tricolor-kitten-meows-floorroom_
   457211-10960.jpg?w=1060`;
+  try {
+    const response = await requestPOST(`/post`, {
+      title,
+      content,
+      image,
+    });
 
-  const { data } = await requestPOST(`/post`, { title, content, image });
+    if (response.code === 201) {
+      const { data } = response;
+      return {
+        code: 201,
+        postId: data.postId,
+      };
+    }
 
-  console.log('addPost data: ', data);
-  return data;
+    if (response.status === 400) {
+      return {
+        code: 400,
+        message: '중복 게시글은 작성할 수 없습니다.',
+      };
+    }
+  } catch (error) {
+    console.log('error: ', error);
+  }
 };
 
 const modifyPost = async (postId, title, content, image) => {

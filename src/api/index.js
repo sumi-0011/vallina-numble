@@ -16,24 +16,22 @@ export const requestGET = async (url, options = {}) => {
 };
 
 export const requestPOST = async (url, body) => {
-  try {
-    const fullUrl = `${BASE_PATH}${url}`;
+  const fullUrl = `${BASE_PATH}${url}`;
 
-    const response = await fetch(fullUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+  const response = await fetch(fullUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
 
-    if (response.ok) {
-      const json = await response.json();
-      return json;
-    }
-  } catch (error) {
-    console.log('error: ', error);
+  if (response.ok) {
+    const json = await response.json();
+    return json;
   }
+
+  return response;
 };
 
 export const requestDELETE = async (url) => {

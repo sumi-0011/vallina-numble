@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import { addPost } from '../api/post';
 import '../css/new.scss';
 function Writing({ $target }) {
   this.state = {};
@@ -23,7 +24,14 @@ function Writing({ $target }) {
       <div class='submit-btn'></div>
     </div>`;
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const data = await addPost(
+      'titasdle-asdasd',
+      'contasdasdasdadsent-tasdasdasdasdsdestaasdsd',
+      '',
+    );
+    console.log('handleSubmit data: ', data);
+  };
 
   this.render = () => {
     $target.appendChild($page);
