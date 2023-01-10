@@ -1,4 +1,4 @@
-import { requestGET } from '../api';
+import { getPostList } from '../api/post';
 import { routeChange } from '../router';
 import IconTextButton from '../components/IconTextButton';
 import Post from '../components/Post';
@@ -17,7 +17,7 @@ function Home({ $target, initialState }) {
   };
 
   const fetchPosts = async () => {
-    const { data } = await requestGET('/posts');
+    const data = await getPostList();
     this.setState({ ...this.state, posts: data.posts });
 
     this.render();
