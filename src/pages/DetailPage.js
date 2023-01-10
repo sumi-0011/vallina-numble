@@ -1,7 +1,7 @@
 import Comment from '../components/Comment';
 import Detail from '../components/Detail';
 import CommentInput from '../components/CommentInput';
-import { request } from '../api';
+import { getPost } from '../api/post';
 
 function DetailPage({ $target, postId }) {
   this.state = { postId, post: null, comments: [] };
@@ -18,8 +18,7 @@ function DetailPage({ $target, postId }) {
 
   const fetchPosts = async () => {
     const { postId } = this.state;
-    const { data } = await request(`/post/${postId}`);
-    console.log('data: ', data);
+    const data = await getPost(postId);
     this.setState({ ...this.state, post: data.post, comments: data.comments });
 
     this.render();
