@@ -1,9 +1,11 @@
 import ModifyIcon from './icons/ModifyIcon';
 import RemoveIcon from './icons/RemoveIcon';
 
+import styled from '../css/button.module.scss';
+
 function IconButton({ $target, initialState }) {
   const $button = document.createElement('button');
-  $button.className = 'icon-button';
+  $button.className = styled['icon-button'];
 
   $target.appendChild($button);
 

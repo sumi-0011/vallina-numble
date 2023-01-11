@@ -1,14 +1,15 @@
-import Comment from '../../components/Comment';
-import Detail from '../../components/Detail';
+import Comment from './Comment';
+import Detail from './Detail';
 import { getPost } from '../../api/post';
 import CommentInput from './CommentInput';
+import styled from '../../css/detail.module.scss';
 
 function DetailPage({ $target, postId }) {
   this.state = { postId, post: null, comments: [], inputComment: '' };
 
   const $page = document.createElement('div');
   $target.appendChild($page);
-  $page.className = 'detail-page';
+  $page.className = styled['detail-page'];
 
   this.setState = (nextState) => {
     this.state = { ...this.state, ...nextState };
@@ -36,8 +37,7 @@ function DetailPage({ $target, postId }) {
     $page.innerHTML = `
       <div class="detail-wrapper"></div>
       <hr/>
-      <div class="comment-list"></div>
-      <div class="comment-input-wrapper"></div>
+      <div class="comment-list ${styled['comment-list']}"></div>
     `;
 
     new Detail({
@@ -56,7 +56,7 @@ function DetailPage({ $target, postId }) {
     });
 
     new CommentInput({
-      $target: $page.querySelector('.comment-input-wrapper'),
+      $target: $page,
       initialState: {
         postId,
       },
