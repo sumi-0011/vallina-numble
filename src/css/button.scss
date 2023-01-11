@@ -7,6 +7,17 @@
 
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: #454545;
+  background-color: transparent;
+  cursor: pointer;
+}
+.basic {
   background-color: #bb2649;
+  color: #fff;
+}
+.delete-btn {
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
 }

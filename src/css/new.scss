@@ -2,6 +2,23 @@
   &__img-wrapper {
     height: 96px;
     border: 1px solid #e2e2e2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: fit-content;
+    }
   }
 
   input::placeholder {
@@ -38,4 +55,9 @@
       resize: none;
     }
   }
+}
+
+.loading {
+  text-align: center;
+  position: absolute;
 }
