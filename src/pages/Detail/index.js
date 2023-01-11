@@ -48,7 +48,10 @@ function DetailPage({ $target, postId }) {
     comments.map((comment) => {
       new Comment({
         $target: $page.querySelector('.comment-list'),
-        initialState: { comment },
+        initialState: {
+          comment,
+        },
+        refetch: fetchPost,
       });
     });
 
@@ -56,8 +59,8 @@ function DetailPage({ $target, postId }) {
       $target: $page.querySelector('.comment-input-wrapper'),
       initialState: {
         postId,
-        refetch: fetchPost,
       },
+      refetch: fetchPost,
     });
   };
 
