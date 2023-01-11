@@ -5,6 +5,7 @@
 html,
 body {
   margin: 0;
+  background-color: rgb(218, 207, 207);
 }
 hr {
   width: 100%;
@@ -17,7 +18,7 @@ hr {
   margin: auto;
   box-sizing: border-box;
   padding: 18px;
-
+  background-color: #fff;
   .content {
     height: 100%;
   }
