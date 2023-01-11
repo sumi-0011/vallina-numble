@@ -1,6 +1,6 @@
 import Home from './pages/Home';
-import DetailPage from './pages/DetailPage';
-import WritingPage from './pages/WritingPage';
+import DetailPage from './pages/Detail';
+import WritingPage from './pages/Writing';
 import { init } from './router';
 
 function App({ $target }) {
