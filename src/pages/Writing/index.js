@@ -28,7 +28,7 @@ function Writing({ $target }) {
     this.setState({ loading: true });
     try {
       const { title, content, img } = this.state;
-      const data = await addPost(title, content, img);
+      await addPost(title, content, img);
 
       window.location.href = '/';
     } catch (error) {

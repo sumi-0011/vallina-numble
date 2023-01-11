@@ -2,16 +2,16 @@
 
 ### post
 
-- [ ] GET /posts
-- [ ] GET / post/:postId
-- [ ] POST /post
+- [x] GET /posts
+- [x] GET / post/:postId
+- [x] POST /post
 - [ ] Patch /post/:postId
 - [ ] DELETE /post/:postId
 
 ### comment
 
-- [ ] POST /comment/:postId
-- [ ] DELETE /comment/:commentId
+- [x] POST /comment/:postId
+- [x] DELETE /comment/:commentId
 
 ## component 구조
 
