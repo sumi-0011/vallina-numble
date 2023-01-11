@@ -1,37 +1,40 @@
 const BASE_PATH = 'http://43.201.103.199';
 
 export const requestGET = async (url, options = {}) => {
-  const fullUrl = `${BASE_PATH}${url}`;
-  const response = await fetch(fullUrl, options);
+  try {
+    const response = await fetch(`${BASE_PATH}${url}`, options);
 
-  if (response.ok) {
     const json = await response.json();
-    return json;
+    if (response.ok) {
+      return json;
+    }
+    throw new Error('API 통신 실패');
+  } catch (error) {
+    throw error;
   }
-  throw new Error({ name: 'API 통신 실패', message: 'API 통신 실패' });
 };
 
 export const requestPOST = async (url, body) => {
   try {
-    const fullUrl = `${BASE_PATH}${url}`;
-
-    const response = await fetch(fullUrl, {
+    const response = await fetch(`${BASE_PATH}${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     });
-    console.log('response: ', response);
+
+    const json = await response.json();
 
     if (response.ok) {
-      const json = await response.json();
       return json;
     }
-    throw new Error({
-      status: response.status,
-      statusText: response.statusText,
-    });
+
+    if (json.code === 400) {
+      throw new Error(json.message);
+    }
+
+    throw new Error('API 통신 실패');
   } catch (error) {
     throw error;
   }
@@ -43,15 +46,13 @@ export const requestDELETE = async (url) => {
       method: 'DELETE',
     });
 
-    console.log('response: ', response);
-
-    return response;
+    const json = await response.json();
     if (response.ok) {
-      const json = await response.json();
       return json;
     }
+    throw new Error('API 통신 실패');
   } catch (error) {
-    console.log('error: ', error);
+    throw error;
   }
 };
 
@@ -64,12 +65,14 @@ export const requestPATCH = async (url, body) => {
       },
       body: JSON.stringify(body),
     });
-    console.log('response: ', response);
+
+    const json = await response.json();
     if (response.ok) {
-      const json = await response.json();
       return json;
     }
+
+    throw new Error('API 통신 실패');
   } catch (error) {
-    console.log('error: ', error);
+    throw error;
   }
 };
