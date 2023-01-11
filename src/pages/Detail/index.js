@@ -1,8 +1,8 @@
-import Comment from '../components/Comment';
-import Detail from '../components/Detail';
-import { getPost } from '../api/post';
-import SendIcon from '../components/icons/SendIcon';
-import { addComment } from '../api/comment';
+import Comment from '../../components/Comment';
+import Detail from '../../components/Detail';
+import { getPost } from '../../api/post';
+import SendIcon from '../../components/icons/SendIcon';
+import { addComment } from '../../api/comment';
 
 function DetailPage({ $target, postId }) {
   this.state = { postId, post: null, comments: [], inputComment: '' };
