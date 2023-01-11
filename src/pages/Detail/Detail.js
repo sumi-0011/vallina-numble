@@ -1,18 +1,12 @@
 import styled from '../../css/detail.module.scss';
 import IconButton from '../../components/IconButton';
+import Component from '../../components/Component';
 
-function Detail({ $target, initialState }) {
-  const $detail = document.createElement('div');
-  $target.appendChild($detail);
-  $detail.className = styled['detail'];
-
-  this.state = initialState;
-
-  this.render = () => {
-    const { title, postId, content, createdAt, image, updatedAt } =
-      this.state.post;
-
-    $detail.innerHTML = `
+class Detail extends Component {
+  view() {
+    const { title, postId, content, createdAt, image } = this.props.post;
+    return `
+      <div class="${styled.detail}">
         <div class=${styled.img}>
           <img src="${image}" />
         </div>
@@ -22,26 +16,29 @@ function Detail({ $target, initialState }) {
             <span class="${styled.date}">${createdAt}</span>
           </div>
           <div class="${styled.content}">${content}</div>
-          <div class="${styled.bottom} bottom"></div>
+          <div class="${styled.bottom} bottom">
+          </div>
         </div>
+      </div>
     `;
+  }
 
-    new IconButton({
-      $target: $detail.querySelector('.bottom'),
-      initialState: {
-        iconName: 'modify',
+  mount() {
+    const $detail = this.$target.querySelector(`.${styled.detail}`);
+
+    new IconButton('button', $detail.querySelector('.bottom'), {
+      icon: 'modify',
+      onClick: () => {
+        console.log('mo');
       },
+      className: 'modify-button',
     });
 
-    new IconButton({
-      $target: $detail.querySelector('.bottom'),
-      initialState: {
-        iconName: 'delete',
-      },
+    new IconButton('button', $detail.querySelector('.bottom'), {
+      icon: 'delete',
+      className: 'delete-button',
     });
-  };
-
-  this.render();
+  }
 }
 
 export default Detail;
