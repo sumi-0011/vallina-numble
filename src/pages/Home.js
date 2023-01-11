@@ -10,18 +10,15 @@ function Home({ $target, initialState }) {
   const $page = document.createElement('div');
   $target.appendChild($page);
 
-  const $content = document.createElement('div');
-
   this.setState = (nextState) => {
-    this.state = nextState;
+    this.state = { ...this.state, ...nextState };
+    this.render();
   };
 
   const fetchPosts = async () => {
     const data = await getPostList();
 
-    this.setState({ ...this.state, posts: data.posts });
-
-    this.render();
+    this.setState({ posts: data.posts });
   };
 
   const newPostBtnClick = () => {

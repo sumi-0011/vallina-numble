@@ -1,7 +1,8 @@
 import Comment from '../components/Comment';
 import Detail from '../components/Detail';
-import CommentInput from '../components/CommentInput';
 import { getPost } from '../api/post';
+import SendIcon from '../components/icons/SendIcon';
+import { addComment } from '../api/comment';
 
 function DetailPage({ $target, postId }) {
   this.state = { postId, post: null, comments: [] };
@@ -12,16 +13,24 @@ function DetailPage({ $target, postId }) {
   $page.className = 'detail-page';
 
   this.setState = (nextState) => {
-    this.state = nextState;
+    this.state = { ...this.state, ...nextState };
     this.render();
   };
 
-  const fetchPosts = async () => {
+  const fetchPost = async () => {
     const { postId } = this.state;
     const data = await getPost(postId);
-    this.setState({ ...this.state, post: data.post, comments: data.comments });
+    this.setState({ post: data.post, comments: data.comments });
+  };
 
-    this.render();
+  const clickButton = async () => {
+    const { postId } = this.state;
+    const response = await addComment(
+      postId,
+      '안asdasdas녕아ㅏㅣasasasasdadsdadsdsddasddas미만ㅇ',
+    );
+
+    await fetchPost();
   };
 
   this.render = () => {
@@ -50,12 +59,20 @@ function DetailPage({ $target, postId }) {
       });
     });
 
-    new CommentInput({
-      $target: $page.querySelector('.comment-input-wrapper'),
-    });
+    const $inputWrapper = $page.querySelector('.comment-input-wrapper');
+    const $commentInput = document.createElement('input');
+    $commentInput.className = 'comment-input';
+
+    const $commentAddBtn = document.createElement('button');
+    $commentAddBtn.className = 'comment-submit';
+    $commentAddBtn.addEventListener('click', clickButton);
+
+    $inputWrapper.appendChild($commentInput);
+    $inputWrapper.appendChild($commentAddBtn);
+    new SendIcon({ $target: $commentAddBtn });
   };
 
-  fetchPosts();
+  fetchPost();
 }
 
 export default DetailPage;
