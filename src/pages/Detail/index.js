@@ -1,8 +1,7 @@
 import Comment from '../../components/Comment';
 import Detail from '../../components/Detail';
 import { getPost } from '../../api/post';
-import SendIcon from '../../components/icons/SendIcon';
-import { addComment } from '../../api/comment';
+import CommentInput from './CommentInput';
 
 function DetailPage({ $target, postId }) {
   this.state = { postId, post: null, comments: [], inputComment: '' };
@@ -18,24 +17,13 @@ function DetailPage({ $target, postId }) {
 
   const fetchPost = async () => {
     const { postId } = this.state;
-    const data = await getPost(postId);
-    this.setState({ post: data.post, comments: data.comments });
-  };
-
-  const clickButton = async () => {
+    if (!postId) return;
     try {
-      const { postId, inputComment } = this.state;
-      await addComment(postId, inputComment);
-      this.setState({ inputComment: '' });
-
-      await fetchPost();
+      const data = await getPost(postId);
+      this.setState({ post: data.post, comments: data.comments });
     } catch (error) {
       alert(error);
     }
-  };
-
-  const handleChangeComment = (e) => {
-    this.setState({ inputComment: e.target.value });
   };
 
   this.render = () => {
@@ -64,19 +52,13 @@ function DetailPage({ $target, postId }) {
       });
     });
 
-    const $inputWrapper = $page.querySelector('.comment-input-wrapper');
-    const $commentInput = document.createElement('input');
-    $commentInput.className = 'comment-input';
-    $commentInput.value = inputComment;
-    $commentInput.addEventListener('change', handleChangeComment);
-
-    const $commentAddBtn = document.createElement('button');
-    $commentAddBtn.className = 'comment-submit';
-    $commentAddBtn.addEventListener('click', clickButton);
-
-    $inputWrapper.appendChild($commentInput);
-    $inputWrapper.appendChild($commentAddBtn);
-    new SendIcon({ $target: $commentAddBtn });
+    new CommentInput({
+      $target: $page.querySelector('.comment-input-wrapper'),
+      initialState: {
+        postId,
+        refetch: fetchPost,
+      },
+    });
   };
 
   fetchPost();
