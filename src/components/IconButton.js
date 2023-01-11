@@ -10,26 +10,22 @@ function IconButton({ $target, initialState }) {
   $target.appendChild($button);
 
   this.state = initialState;
-  //iconName
 
-  this.render = () => {
-    if (!this.state.iconName) {
-      return;
-    }
-    const { iconName } = this.state;
+  switch (this.state.iconName) {
+    case 'modify':
+      new ModifyIcon({ $target: $button });
+      break;
+    case 'delete':
+      new RemoveIcon({ $target: $button });
+      break;
 
-    switch (iconName) {
-      case 'modify':
-        new ModifyIcon({ $target: $button });
-        break;
-      case 'delete':
-        new RemoveIcon({ $target: $button });
-        break;
+    default:
+      break;
+  }
 
-      default:
-        break;
-    }
-  };
+  this.render = () => {};
+
+  $button.addEventListener('click', this.state.onClick);
 
   this.render();
 }
