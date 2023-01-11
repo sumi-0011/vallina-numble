@@ -13,12 +13,13 @@ function IconTextButton({ initialState, $target }) {
       return;
     }
 
-    const { icon, name, onClick } = this.state;
+    const { icon, name, onClick, className } = this.state;
     new Button({
       $target: $wrapper,
       initialState: {
         name,
         onClick,
+        className,
       },
     });
   };

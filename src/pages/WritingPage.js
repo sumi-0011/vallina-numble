@@ -1,38 +1,61 @@
 import Button from '../components/Button';
 import { addPost } from '../api/post';
 import '../css/new.scss';
+import { getRandomPhoto } from '../api/photo';
 function Writing({ $target }) {
-  this.state = { title: '', content: '' };
+  this.state = { title: '', content: '', img: null, loading: false };
 
   const $page = document.createElement('div');
   $target.appendChild($page);
-  $page.className = 'Writing';
+  $page.className = 'writing';
 
-  this.setState = (nextState) => {
-    this.state = nextState;
+  this.setState = (newState) => {
+    this.state = {
+      ...this.state,
+      ...newState,
+    };
+
     this.render();
   };
 
-  const handleSubmit = async () => {
-    const { title, content } = this.state;
-    const data = await addPost(title, content, '');
-    console.log('data: ', data);
+  const getPhoto = async () => {
+    const imgUrl = await getRandomPhoto();
+    this.setState({ img: imgUrl });
   };
 
-  const handleValueChange = (e, key) => {
-    const value = e.target.value;
-    this.setState({
-      ...this.state,
-      [key]: value,
-    });
+  const handleSubmit = async () => {
+    this.setState({ loading: true });
+    try {
+      const { title, content, img } = this.state;
+      const data = await addPost(title, content, img);
+
+      window.location.href = '/';
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
+
+  const handleTitleChange = (e) => {
+    this.setState({ title: e.target.value });
+  };
+
+  const handleContentChange = (e) => {
+    this.setState({ content: e.target.value });
+  };
+
+  const handleDeleteBtn = () => {
+    this.setState({ img: null });
   };
 
   this.render = () => {
-    const { title, content } = this.state;
+    const { title, content, img, loading } = this.state;
 
     $page.innerHTML = `
       <div class="new">
-        <div class="new__img-wrapper"></div>
+        <div class="new__img-wrapper">
+        </div>
         <div class="new__title">
           <h2>제목</h2>
           <input type="text" placeholder="글 제목을 입력해주세요" value='${title}' />
@@ -45,26 +68,48 @@ function Writing({ $target }) {
             placeholder="글 내용을 입력해주세요."
           >${content}</textarea>
         </div>
-        <div class='submit-btn'></div>
+        <div class='submit-btn'> 
+        </div>
       </div>`;
+
+    const $imgWrapper = $page.querySelector('.new__img-wrapper');
+    if (img) {
+      const $img = document.createElement('img');
+      $imgWrapper.appendChild($img);
+      $img.src = this.state.img;
+
+      new Button({
+        $target: $imgWrapper,
+        initialState: {
+          name: 'x',
+          className: 'delete-btn',
+          onClick: handleDeleteBtn,
+        },
+      });
+    } else {
+      new Button({
+        $target: $imgWrapper,
+        initialState: {
+          name: '랜덤 이미지 생성',
+          onClick: getPhoto,
+        },
+      });
+    }
 
     new Button({
       $target: $page.querySelector('.submit-btn'),
       initialState: {
-        name: '등록하기',
+        name: loading ? '로딩중' : '등록하기',
+        className: 'basic',
         onClick: handleSubmit,
       },
     });
 
     const $input = $page.querySelector('.new__title input');
-    $input.addEventListener('change', (e) => {
-      handleValueChange(e, 'title');
-    });
+    $input.addEventListener('change', handleTitleChange);
 
     const $content = $page.querySelector('.new__content textarea');
-    $content.addEventListener('change', (e) => {
-      handleValueChange(e, 'content');
-    });
+    $content.addEventListener('change', handleContentChange);
   };
 }
 

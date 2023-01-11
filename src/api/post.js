@@ -13,8 +13,10 @@ const getPostList = async () => {
 };
 
 const addPost = async (title, content, image) => {
-  image = `https://img.freepik.com/premium-photo/small-tricolor-kitten-meows-floorroom_
-  457211-10960.jpg?w=1060`;
+  if (!title || !content || !image) {
+    throw new Error('입력하지 않은 값이 있습니다. 모두 입력해주세요.');
+  }
+
   try {
     const response = await requestPOST(`/post`, {
       title,
@@ -31,13 +33,10 @@ const addPost = async (title, content, image) => {
     }
 
     if (response.status === 400) {
-      return {
-        code: 400,
-        message: '중복 게시글은 작성할 수 없습니다.',
-      };
+      throw new Error('중복 게시글은 작성할 수 없습니다.');
     }
   } catch (error) {
-    console.log('error: ', error);
+    throw error;
   }
 };
 

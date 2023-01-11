@@ -41,6 +41,7 @@ function Home({ $target, initialState }) {
       $target: $page.querySelector('.button-container'),
       initialState: {
         name: '새 글 작성하기',
+        className: 'basic',
         onClick: newPostBtnClick,
       },
     });
