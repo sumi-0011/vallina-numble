@@ -18,6 +18,7 @@ function Home({ $target, initialState }) {
 
   const fetchPosts = async () => {
     const data = await getPostList();
+
     this.setState({ ...this.state, posts: data.posts });
 
     this.render();
