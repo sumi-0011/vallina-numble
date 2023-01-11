@@ -24,13 +24,17 @@ function DetailPage({ $target, postId }) {
   };
 
   const clickButton = async () => {
-    const { postId } = this.state;
-    const response = await addComment(
-      postId,
-      '안asdasdas녕아ㅏㅣasasasasdadsdadsdsddasddas미만ㅇ',
-    );
+    try {
+      const { postId } = this.state;
+      const response = await addComment(
+        postId,
+        '안asdasdas녕아ㅏㅣasasasasdadsdadsdsddasddas미만ㅇ',
+      );
 
-    await fetchPost();
+      await fetchPost();
+    } catch (error) {
+      alert(error);
+    }
   };
 
   this.render = () => {
