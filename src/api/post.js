@@ -51,13 +51,18 @@ const addPost = async (title, content, image) => {
   }
 };
 
-const modifyPost = async (postId, title, content, image) => {
-  const body = { title, content, image };
-  cleanObj(body);
+const editPost = async (postId, title, content, image) => {
+  try {
+    // TODO : 변경하려는 필드만 으로 바꾸기
+    const body = { title, content, image };
+    cleanObj(body);
 
-  const data = await requestPATCH(`/post/${postId}`, body);
+    const data = await requestPATCH(`/post/${postId}`, body);
 
-  return data;
+    return data.post.postId;
+  } catch (error) {
+    console.log('error: ', error);
+  }
 };
 const deletePost = async (postId) => {
   const res = await requestDELETE(`/post/${postId}`);
@@ -74,4 +79,4 @@ const cleanObj = (obj) => {
   }
 };
 
-export { getPost, getPostList, addPost, modifyPost, deletePost };
+export { getPost, getPostList, addPost, editPost, deletePost };

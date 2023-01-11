@@ -2,6 +2,7 @@ import Home from './pages/Home';
 import DetailPage from './pages/Detail';
 import WritingPage from './pages/Writing';
 import { init } from './router';
+import Edit from './pages/Edit';
 
 function App({ $target }) {
   this.route = () => {
@@ -19,6 +20,9 @@ function App({ $target }) {
     } else if (pathname.indexOf('post') === 1) {
       const [, , postId] = pathname.split('/');
       new DetailPage({ $target: $content, postId }).render();
+    } else if (pathname.indexOf('edit') === 1) {
+      const [, , postId] = pathname.split('/');
+      new Edit({ $target: $content, postId }).render();
     } else if (pathname === '/write') {
       new WritingPage({ $target: $content }).render();
     }

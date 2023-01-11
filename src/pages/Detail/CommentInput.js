@@ -1,7 +1,6 @@
 import SendIcon from '../../components/icons/SendIcon';
 import { addComment } from '../../api/comment';
 import styled from '../../css/comment.module.scss';
-console.log('styled: ', styled);
 
 function CommentInput({ $target, initialState, refetch }) {
   const $component = document.createElement('div');
