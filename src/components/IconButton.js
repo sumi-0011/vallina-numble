@@ -2,32 +2,30 @@ import ModifyIcon from './icons/ModifyIcon';
 import RemoveIcon from './icons/RemoveIcon';
 
 import styled from '../css/button.module.scss';
+import Component from './Component';
 
-function IconButton({ $target, initialState }) {
-  const $button = document.createElement('button');
-  $button.className = styled['icon-button'];
+class IconButton extends Component {
+  view() {
+    this.$component.className = styled['icon-button'];
 
-  $target.appendChild($button);
-
-  this.state = initialState;
-
-  switch (this.state.iconName) {
-    case 'modify':
-      new ModifyIcon({ $target: $button });
-      break;
-    case 'delete':
-      new RemoveIcon({ $target: $button });
-      break;
-
-    default:
-      break;
+    return ``;
   }
 
-  this.render = () => {};
+  mount() {
+    const { icon, onClick } = this.props;
+    switch (icon) {
+      case 'modify':
+        new ModifyIcon({ $target: this.$component });
+        break;
+      case 'delete':
+        new RemoveIcon({ $target: this.$component });
+        break;
+      default:
+        break;
+    }
 
-  $button.addEventListener('click', this.state.onClick);
-
-  this.render();
+    this.$component.addEventListener('click', onClick);
+  }
 }
 
 export default IconButton;

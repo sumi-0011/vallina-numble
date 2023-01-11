@@ -4,12 +4,18 @@ class Component {
   state;
   props;
   $target;
-  constructor($target, props) {
+  $component;
+
+  constructor(elementType, $target, props) {
     this.$target = $target;
     this.props = props;
-
+    this.$component = document.createElement(elementType);
     this.render();
   }
+
+  // setAttribute(name, value) {
+  //   this.$component.setAttribute(name, value);
+  // }
 
   setState(nextState) {
     this.state = { ...this.state, ...nextState };
@@ -23,7 +29,8 @@ class Component {
   mount() {}
 
   render() {
-    this.$target.insertAdjacentHTML('beforeend', this.view());
+    this.$component.insertAdjacentHTML('beforeend', this.view());
+    this.$target.appendChild(this.$component);
     this.mount();
   }
 
@@ -32,7 +39,7 @@ class Component {
   }
 
   onClick(selector, callback) {
-    $currentTarget = this.$target.querySelector(selector);
+    $currentTarget = this.$component.querySelector(selector);
 
     $currentTarget.addEventListener('click', (e) => {
       callback(e);
@@ -40,7 +47,7 @@ class Component {
   }
 
   onChange(selector, callback) {
-    $currentTarget = this.$target.querySelector(selector);
+    $currentTarget = this.$component.querySelector(selector);
 
     $currentTarget.addEventListener('change', (e) => {
       callback(e);
@@ -48,7 +55,7 @@ class Component {
   }
 
   onSubmit(selector, callback) {
-    $currentTarget = this.$target.querySelector(selector);
+    $currentTarget = this.$component.querySelector(selector);
 
     $currentTarget.addEventListener('submit', (e) => {
       callback(e);
