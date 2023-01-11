@@ -1,0 +1,55 @@
+// comment-input
+.input-wrapper {
+  display: flex;
+  height: 36px;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  height: 100%;
+  background: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+}
+
+.submit-btn {
+  width: fit-content;
+  height: 100%;
+
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+
+  .send-icon {
+    height: 24px;
+  }
+}
+
+// comment
+.comment {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  .content {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #454545;
+  }
+
+  .delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    border: 1px solid #e2e2e2;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+  }
+}
