@@ -1,7 +1,8 @@
-import Button from '../components/Button';
-import { addPost } from '../api/post';
-import '../css/new.scss';
-import { getRandomPhoto } from '../api/photo';
+import Button from '../../components/Button';
+import { addPost } from '../../api/post';
+import '../../css/new.scss';
+import { getRandomPhoto } from '../../api/photo';
+
 function Writing({ $target }) {
   this.state = { title: '', content: '', img: null, loading: false };
 

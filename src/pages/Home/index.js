@@ -1,8 +1,8 @@
-import { getPostList } from '../api/post';
-import { routeChange } from '../router';
-import IconTextButton from '../components/IconTextButton';
-import Post from '../components/Post';
-import '../css/home.scss';
+import { getPostList } from '../../api/post';
+import { routeChange } from '../../router';
+import IconTextButton from '../../components/IconTextButton';
+import Post from '../../components/Post';
+import '../../css/home.scss';
 
 function Home({ $target, initialState }) {
   this.state = initialState;
