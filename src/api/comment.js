@@ -10,8 +10,11 @@ const addComment = async (postId, content) => {
 };
 
 const deleteComment = async (commentId) => {
-  const res = await requestDELETE(`/comment/${commentId}`);
-  console.log('res: ', res);
+  try {
+    const res = await requestDELETE(`/comment/${commentId}`);
+  } catch (error) {
+    throw error;
+  }
 };
 
 export { addComment, deleteComment };
