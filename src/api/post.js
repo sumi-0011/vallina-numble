@@ -11,12 +11,16 @@ function comparePostID(a, b) {
 }
 
 const getPostList = async () => {
-  const { data } = await requestGET(`/posts`);
+  try {
+    const { data } = await requestGET(`/posts`);
 
-  const posts = data.posts;
-  posts.sort(comparePostID);
+    const posts = data.posts;
+    posts.sort(comparePostID);
 
-  return { ...data, posts };
+    return { ...data, posts };
+  } catch (error) {
+    throw error;
+  }
 };
 
 const addPost = async (title, content, image) => {
