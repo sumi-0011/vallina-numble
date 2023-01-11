@@ -1,7 +1,7 @@
 import SendIcon from '../../components/icons/SendIcon';
 import { addComment } from '../../api/comment';
 
-function CommentInput({ $target, initialState }) {
+function CommentInput({ $target, initialState, refetch }) {
   const $input = document.createElement('input');
   $target.appendChild($input);
   $input.className = 'comment-input';
@@ -28,7 +28,7 @@ function CommentInput({ $target, initialState }) {
       const { postId, value } = this.state;
 
       await addComment(postId, value);
-      await this.state.refetch();
+      await refetch();
 
       this.setState({ value: '' });
     } catch (error) {
