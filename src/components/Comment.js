@@ -1,7 +1,7 @@
 import { deleteComment } from '../api/comment';
 import XIcon from './icons/XIcon';
 
-function Comment({ $target, initialState }) {
+function Comment({ $target, initialState, refetch }) {
   const $comment = document.createElement('div');
   $comment.className = 'comment';
   $target.appendChild($comment);
@@ -11,8 +11,13 @@ function Comment({ $target, initialState }) {
 
   this.state = initialState;
 
-  const handleDeleteComment = (commentId) => {
-    deleteComment(commentId);
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await deleteComment(commentId);
+      await refetch();
+    } catch (error) {
+      alert(error);
+    }
   };
 
   this.render = () => {
