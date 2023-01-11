@@ -1,3 +1,8 @@
+.edit-page {
+  img {
+    width: 100%;
+  }
+}
 .post {
   display: flex;
   border: 1px solid #e2e2e2;
@@ -34,5 +39,76 @@
 
   &__content {
     font-size: 16px;
+  }
+}
+
+.new {
+  &__img-wrapper {
+    height: 96px;
+    border: 1px solid #e2e2e2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: fit-content;
+    }
+  }
+
+  input::placeholder {
+    color: #cbc9c9;
+    font-style: italic;
+  }
+  textarea::placeholder {
+    color: #cbc9c9;
+    font-weight: bold;
+  }
+
+  h2 {
+    color: #454545;
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    margin: 15px 0;
+  }
+}
+
+.loading {
+  text-align: center;
+  position: absolute;
+}
+.heading {
+  color: #454545;
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 15px 0;
+}
+.title {
+  input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
+
+.content {
+  textarea {
+    border: none;
+    width: 100%;
+    resize: none;
   }
 }
