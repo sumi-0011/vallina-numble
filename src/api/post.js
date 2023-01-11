@@ -6,10 +6,17 @@ const getPost = async (postId) => {
   return data;
 };
 
+function comparePostID(a, b) {
+  return parseInt(b.postId) - parseInt(a.postId);
+}
+
 const getPostList = async () => {
   const { data } = await requestGET(`/posts`);
 
-  return data;
+  const posts = data.posts;
+  posts.sort(comparePostID);
+
+  return { ...data, posts };
 };
 
 const addPost = async (title, content, image) => {
