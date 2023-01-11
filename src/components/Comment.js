@@ -1,3 +1,4 @@
+import { deleteComment } from '../api/comment';
 import XIcon from './icons/XIcon';
 
 function Comment({ $target, initialState }) {
@@ -5,7 +6,14 @@ function Comment({ $target, initialState }) {
   $comment.className = 'comment';
   $target.appendChild($comment);
 
+  const $deleteBtn = document.createElement('button');
+  $deleteBtn.className = 'comment__delete-btn';
+
   this.state = initialState;
+
+  const handleDeleteComment = (commentId) => {
+    deleteComment(commentId);
+  };
 
   this.render = () => {
     if (!this.state.comment) {
@@ -19,10 +27,13 @@ function Comment({ $target, initialState }) {
 
     $comment.innerHTML = `
       <div class="comment__content">${content}</div>
-      <button class="comment__delete-btn"></button>
     `;
+    $comment.appendChild($deleteBtn);
+    $deleteBtn.addEventListener('click', () => {
+      handleDeleteComment(commentId);
+    });
 
-    new XIcon({ $target: $comment.querySelector('.comment__delete-btn') });
+    new XIcon({ $target: $deleteBtn });
   };
 
   this.render();
