@@ -1,30 +1,86 @@
-import Button from '../../components/Button';
-import { addPost } from '../../api/post';
-import '../../css/new.scss';
 import { getRandomPhoto } from '../../api/photo';
+import { addPost } from '../../api/post';
+import Button from '../../components/Button';
+import Page from '../../components/Page';
+import '../../css/new.scss';
 
-function Writing({ $target }) {
-  this.state = { title: '', content: '', img: null, loading: false };
+class Writing extends Page {
+  init() {
+    this.setState({ title: '', content: '', img: null });
+  }
 
-  const $page = document.createElement('div');
-  $target.appendChild($page);
-  $page.className = 'writing';
+  view() {
+    const { title, content, img } = this.state;
 
-  this.setState = (newState) => {
-    this.state = {
-      ...this.state,
-      ...newState,
-    };
+    return ` 
+      <div>
+      <div class="new__img-wrapper"></div>
+      <div class="new__title">
+        <h2>제목</h2>
+        <input type="text" placeholder="글 제목을 입력해주세요" value='${title}' />
+      </div>
+      <div class="new__content">
+        <h2>내용</h2>
+        <textarea cols="30" rows="10" placeholder="글 내용을 입력해주세요." >${content}</textarea>
+      </div>
+      </div>
+      <div class='submit-btn'></div>
+      `;
+  }
 
-    this.render();
-  };
+  mount() {
+    const { img, loading } = this.state;
 
-  const getPhoto = async () => {
+    const $imgWrapper = this.querySelectorChild('.new__img-wrapper');
+
+    if (img) {
+      const $img = document.createElement('img');
+      $imgWrapper.appendChild($img);
+      $img.src = this.state.img;
+
+      new Button($imgWrapper, {
+        name: 'x',
+        className: 'delete-btn',
+        onClick: this.handleDeleteBtn.bind(this),
+      });
+    } else {
+      new Button($imgWrapper, {
+        name: '랜덤 이미지 생성',
+        onClick: this.getPhoto.bind(this),
+      });
+    }
+
+    new Button(this.querySelectorChild('.submit-btn'), {
+      name: loading ? '로딩중' : '등록하기',
+      className: 'basic',
+      onClick: this.handleSubmit.bind(this),
+    });
+
+    this.querySelectorChild('.new__title input').addEventListener(
+      'change',
+      (e) => {
+        this.setState({ title: e.target.value });
+      },
+    );
+
+    this.querySelectorChild('.new__content textarea').addEventListener(
+      'change',
+      (e) => {
+        this.setState({ content: e.target.value });
+      },
+    );
+  }
+
+  handleDeleteBtn() {
+    this.setState({ img: null });
+  }
+
+  async getPhoto() {
     const imgUrl = await getRandomPhoto();
     this.setState({ img: imgUrl });
-  };
+  }
 
-  const handleSubmit = async () => {
+  async handleSubmit() {
     this.setState({ loading: true });
     try {
       const { title, content, img } = this.state;
@@ -36,82 +92,7 @@ function Writing({ $target }) {
     } finally {
       this.setState({ loading: false });
     }
-  };
-
-  const handleTitleChange = (e) => {
-    this.setState({ title: e.target.value });
-  };
-
-  const handleContentChange = (e) => {
-    this.setState({ content: e.target.value });
-  };
-
-  const handleDeleteBtn = () => {
-    this.setState({ img: null });
-  };
-
-  this.render = () => {
-    const { title, content, img, loading } = this.state;
-
-    $page.innerHTML = `
-      <div class="new">
-        <div class="new__img-wrapper">
-        </div>
-        <div class="new__title">
-          <h2>제목</h2>
-          <input type="text" placeholder="글 제목을 입력해주세요" value='${title}' />
-        </div>
-        <div class="new__content">
-          <h2>내용</h2>
-          <textarea
-            cols="30"
-            rows="10"
-            placeholder="글 내용을 입력해주세요."
-          >${content}</textarea>
-        </div>
-        <div class='submit-btn'> 
-        </div>
-      </div>`;
-
-    const $imgWrapper = $page.querySelector('.new__img-wrapper');
-    if (img) {
-      const $img = document.createElement('img');
-      $imgWrapper.appendChild($img);
-      $img.src = this.state.img;
-
-      new Button({
-        $target: $imgWrapper,
-        initialState: {
-          name: 'x',
-          className: 'delete-btn',
-          onClick: handleDeleteBtn,
-        },
-      });
-    } else {
-      new Button({
-        $target: $imgWrapper,
-        initialState: {
-          name: '랜덤 이미지 생성',
-          onClick: getPhoto,
-        },
-      });
-    }
-
-    new Button({
-      $target: $page.querySelector('.submit-btn'),
-      initialState: {
-        name: loading ? '로딩중' : '등록하기',
-        className: 'basic',
-        onClick: handleSubmit,
-      },
-    });
-
-    const $input = $page.querySelector('.new__title input');
-    $input.addEventListener('change', handleTitleChange);
-
-    const $content = $page.querySelector('.new__content textarea');
-    $content.addEventListener('change', handleContentChange);
-  };
+  }
 }
 
 export default Writing;

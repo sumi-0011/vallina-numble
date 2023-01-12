@@ -1,7 +1,7 @@
 import { getPostList } from '../../api/post';
 import { routeChange } from '../../router';
 import Button from '../../components/Button';
-import Post from '../../components/Post';
+import Post from './Post';
 import '../../css/home.scss';
 import Page from '../../components/Page';
 
