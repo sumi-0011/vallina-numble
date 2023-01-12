@@ -1,7 +1,7 @@
 import { deleteComment } from '../../api/comment';
 import styled from '../../css/comment.module.scss';
 import XIcon from '../../components/icons/XIcon';
-import Component from '../../components/Component';
+import Component from '../../components/common/Component';
 
 class Comment extends Component {
   view() {
@@ -21,8 +21,8 @@ class Comment extends Component {
 
     new XIcon(this.querySelectorChild(`.${styled['delete-btn']}`));
 
-    this.onClick(
-      `.${styled['delete-btn']}`,
+    this.querySelectorChild(`.${styled['delete-btn']}`).addEventListener(
+      'click',
       this.handleDeleteComment.bind(this),
     );
   }

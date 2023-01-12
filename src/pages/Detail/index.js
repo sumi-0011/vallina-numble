@@ -3,20 +3,19 @@ import Detail from './Detail';
 import { getPost } from '../../api/post';
 import CommentInput from './CommentInput';
 import styled from '../../css/detail.module.scss';
-import Page from '../../components/Page';
+import Page from '../../components/common/Page';
 
 class DetailPage extends Page {
   init() {
     this.fetchPost();
-    this.setTitle(`detail-page`);
   }
 
   view() {
     return `
-        <div class="detail-wrapper"></div>
-        <hr/>
-        <div class="comment-list ${styled['comment-list']}"></div>
-        <div class="comment-input-wrapper"></div>
+      <div class="detail-wrapper"></div>
+      <hr/>
+      <div class="comment-list ${styled['comment-list']}"></div>
+      <div class="comment-input-wrapper"></div>
     `;
   }
 

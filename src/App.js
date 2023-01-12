@@ -4,37 +4,37 @@ import WritingPage from './pages/Writing';
 import { init } from './router';
 import Edit from './pages/Edit';
 
-function App({ $target }) {
-  this.route = () => {
+class App {
+  $target;
+  constructor({ $target }) {
+    this.$target = $target;
+    init(this.route.bind(this));
+    window.addEventListener('popstate', this.route.bind(this));
+    this.route();
+  }
+
+  route() {
     const { pathname } = location;
 
-    $target.innerHTML = ` 
+    this.$target.innerHTML = ` 
         <header></header>
         <div class='content'></div>
    `;
 
-    const $content = $target.querySelector('.content');
+    const $content = this.$target.querySelector('.content');
 
     if (pathname === '/') {
-      new Home($content);
+      new Home($content, { title: 'Home' });
     } else if (pathname.indexOf('post') === 1) {
       const [, , postId] = pathname.split('/');
-      new DetailPage($content, { postId });
+      new DetailPage($content, { postId, title: 'Detail' });
     } else if (pathname.indexOf('edit') === 1) {
       const [, , postId] = pathname.split('/');
-      new Edit($content, { postId });
+      new Edit($content, { postId, title: 'Edit' });
     } else if (pathname === '/write') {
-      new WritingPage($content);
+      new WritingPage($content, { title: 'Write' });
     }
-  };
-
-  init(this.route);
-
-  // 뒤로가기를 했을때 렌더링이 되지 않은 문제
-  // window의 popstate 이벤트를 통해, 뒤로가기나 앞으로 가기 등으로 브라우저의 URL이 변경된 경우를 감지
-  window.addEventListener('popstate', this.route);
-
-  this.route();
+  }
 }
 
 export default App;

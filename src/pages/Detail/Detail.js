@@ -1,6 +1,6 @@
 import styled from '../../css/detail.module.scss';
-import IconButton from '../../components/IconButton';
-import Component from '../../components/Component';
+import IconButton from './IconButton';
+import Component from '../../components/common/Component';
 
 class Detail extends Component {
   view() {
@@ -16,8 +16,7 @@ class Detail extends Component {
             <span class="${styled.date}">${createdAt}</span>
           </div>
           <div class="${styled.content}">${content}</div>
-          <div class="${styled.bottom} bottom">
-          </div>
+          <div class="${styled.bottom} bottom"></div>
         </div>
       </div>
     `;

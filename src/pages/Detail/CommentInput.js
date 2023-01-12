@@ -1,6 +1,6 @@
 import { addComment } from '../../api/comment';
 import SendIcon from '../../components/icons/SendIcon';
-import Component from '../../components/Component';
+import Component from '../../components/common/Component';
 import styled from '../../css/comment.module.scss';
 
 class CommentInput extends Component {
@@ -11,7 +11,7 @@ class CommentInput extends Component {
   view() {
     return `
       <div class="${styled['input-wrapper']}">
-        <input type="text"  class="${styled.input}"/>  
+        <input type="text" class="${styled.input}"/>  
         <button class="${styled['submit-btn']}"></button>
       </div>
   `;
@@ -19,10 +19,12 @@ class CommentInput extends Component {
 
   mount() {
     const $submitBtn = this.querySelectorChild(`.${styled['submit-btn']}`);
-    new SendIcon({ $target: $submitBtn, className: 'send-icon' });
+    const $input = this.querySelectorChild(`.${styled.input}`);
 
-    this.onClick(`.${styled['submit-btn']}`, this.clickButton.bind(this));
-    this.onChange(`.${styled.input}`, (e) => {
+    new SendIcon($submitBtn);
+    $submitBtn.addEventListener('click', this.clickButton.bind(this));
+
+    $input.addEventListener('change', (e) => {
       this.setState({ value: e.target.value });
     });
   }
