@@ -1,6 +1,7 @@
 import styled from '../../css/detail.module.scss';
 import IconButton from './IconButton';
 import Component from '../../components/common/Component';
+import { deletePost } from '../../api/post';
 
 class Detail extends Component {
   view() {
@@ -23,7 +24,7 @@ class Detail extends Component {
   }
 
   mount() {
-    const { title, postId, content, createdAt, image } = this.props.post;
+    const { postId } = this.props.post;
 
     const $iconWrapper = this.$component.querySelector('.bottom');
     new IconButton($iconWrapper, {
@@ -36,9 +37,21 @@ class Detail extends Component {
     new IconButton($iconWrapper, {
       icon: 'remove',
       onClick: () => {
-        // this.navigate(`/edit/${postId}`);
+        this.handleRemovePost();
       },
     });
+  }
+
+  async handleRemovePost() {
+    const { postId } = this.props.post;
+    try {
+      await deletePost(postId);
+
+      alert('삭제되었습니다.');
+      this.navigate('/');
+    } catch (error) {
+      alert(error);
+    }
   }
 }
 
