@@ -3,21 +3,47 @@ import Detail from './Detail';
 import { getPost } from '../../api/post';
 import CommentInput from './CommentInput';
 import styled from '../../css/detail.module.scss';
+import Page from '../../components/Page';
 
-function DetailPage({ $target, postId }) {
-  this.state = { postId, post: null, comments: [], inputComment: '' };
+class DetailPage extends Page {
+  view() {
+    return `
+      <div class=${styled['detail-page']}>
+        <div class="detail-wrapper"></div>
+        <hr/>
+        <div class="comment-list ${styled['comment-list']}"></div>
+      </div>
+    `;
+  }
 
-  const $page = document.createElement('div');
-  $target.appendChild($page);
-  $page.className = styled['detail-page'];
+  async init() {
+    this.fetchPost();
+  }
 
-  this.setState = (nextState) => {
-    this.state = { ...this.state, ...nextState };
-    this.render();
-  };
+  mount() {
+    if (!this.props?.postId || !this.state?.post?.postId) return;
+    const { post, comments } = this.state;
+    const { postId } = this.props;
 
-  const fetchPost = async () => {
-    const { postId } = this.state;
+    new Detail(this.$component.querySelector('.detail-wrapper'), {
+      postId,
+      post,
+    });
+
+    comments.map((comment) => {
+      new Comment(this.querySelectorChild('.comment-list'), {
+        comment,
+        refetch: this.fetchPost.bind(this),
+      });
+    });
+    new CommentInput(this.$component, {
+      postId,
+      refetch: this.fetchPost.bind(this),
+    });
+  }
+
+  async fetchPost() {
+    const { postId } = this.props;
     if (!postId) return;
     try {
       const data = await getPost(postId);
@@ -25,45 +51,7 @@ function DetailPage({ $target, postId }) {
     } catch (error) {
       alert(error);
     }
-  };
-
-  this.render = () => {
-    const { postId, post, comments, inputComment } = this.state;
-
-    if (!postId || !post) {
-      return;
-    }
-
-    $page.innerHTML = `
-      <div class="detail-wrapper"></div>
-      <hr/>
-      <div class="comment-list ${styled['comment-list']}"></div>
-    `;
-
-    new Detail($page.querySelector('.detail-wrapper'), { postId, post });
-
-    comments.map((comment) => {
-      new Comment($page.querySelector('.comment-list'), {
-        comment,
-        refetch: fetchPost,
-      });
-    });
-
-    // new CommentInput({
-    //   $target: $page,
-    //   initialState: {
-    //     postId,
-    //   },
-    //   refetch: fetchPost,
-    // });
-
-    new CommentInput($page, {
-      postId,
-      refetch: fetchPost,
-    });
-  };
-
-  fetchPost();
+  }
 }
 
 export default DetailPage;
