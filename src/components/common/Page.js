@@ -1,21 +1,16 @@
-import { routeChange } from '../router';
-
-function createElementFromHTML(htmlString) {
-  var div = document.createElement('div');
-  div.innerHTML = htmlString.trim();
-
-  return div.firstChild;
-}
+import { routeChange } from '../../router';
 
 class Page {
   state;
   props;
   $target;
-  // $component;
 
-  constructor($target, props) {
+  constructor($target, { title, ...props }) {
     this.$target = $target;
     this.props = props;
+
+    document.title = title ?? '';
+
     this.init();
     this.render();
   }
@@ -24,11 +19,8 @@ class Page {
     this.state = { ...this.state, ...nextState };
     this.render();
   }
-  init() {}
 
-  setTitle(title) {
-    document.title = title;
-  }
+  init() {}
 
   setClassName(className) {
     this.$target.className = className;
@@ -41,7 +33,6 @@ class Page {
   mount() {}
 
   render() {
-    console.log('render: ');
     this.$target.innerHTML = this.view();
     this.mount();
   }
