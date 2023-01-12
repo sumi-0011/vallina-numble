@@ -1,35 +1,36 @@
 import SendIcon from '../../components/icons/SendIcon';
 import { addComment } from '../../api/comment';
 import styled from '../../css/comment.module.scss';
+import Component from '../../components/Component';
+class CommentInput extends Component {
+  view() {
+    return `
+      <div class="${styled['input-wrapper']}">
+        <input type="text"  class="${styled.input}"/>  
+        <button class="${styled['submit-btn']}"></button>
+      </div>
+  `;
+  }
 
-function CommentInput({ $target, initialState, refetch }) {
-  const $component = document.createElement('div');
-  $target.appendChild($component);
-  $component.className = styled['input-wrapper'];
-  const $input = document.createElement('input');
-  $component.appendChild($input);
-  $input.className = styled.input;
+  mount() {
+    const $submitBtn = this.$component.querySelector(
+      `.${styled['submit-btn']}`,
+    );
+    new SendIcon({ $target: $submitBtn, className: 'send-icon' });
+    const $input = this.$component.querySelector(`.${styled.input}`);
 
-  const $submitBtn = document.createElement('button');
-  $component.appendChild($submitBtn);
-  $submitBtn.className = styled['submit-btn'];
+    $input.addEventListener('change', (e) => {
+      this.setState({ value: e.target.value });
+    });
 
-  new SendIcon({ $target: $submitBtn, className: 'send-icon' });
+    $submitBtn.addEventListener('click', this.clickButton.bind(this));
+  }
 
-  this.state = initialState;
-
-  this.setState = (nextState) => {
-    this.state = { ...this.state, ...nextState };
-    this.render();
-  };
-
-  const handleChangeComment = (e) => {
-    this.setState({ value: e.target.value });
-  };
-
-  const clickButton = async () => {
+  async clickButton() {
+    if (!this.props.postId) return;
     try {
-      const { postId, value } = this.state;
+      const { postId, refetch } = this.props;
+      const { value } = this.state;
 
       await addComment(postId, value);
       await refetch();
@@ -38,16 +39,7 @@ function CommentInput({ $target, initialState, refetch }) {
     } catch (error) {
       alert(error);
     }
-  };
-
-  this.render = () => {
-    const { value } = this.state;
-
-    $input.value = value;
-  };
-
-  $input.addEventListener('change', handleChangeComment);
-  $submitBtn.addEventListener('click', clickButton);
+  }
 }
 
 export default CommentInput;
