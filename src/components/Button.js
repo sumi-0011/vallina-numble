@@ -1,28 +1,15 @@
 import '../css/button.scss';
+import Component from './Component';
+class Button extends Component {
+  view() {
+    const { name, className } = this.props;
 
-function Button({ $target, initialState }) {
-  const $button = document.createElement('button');
-  $target.appendChild($button);
-  this.state = initialState;
-  $button.className = 'button';
+    return `<button class="button ${className}">${name}</button>`;
+  }
 
-  this.render = () => {
-    const { name, className, onClick } = this.state;
-
-    if (!name) {
-      return;
-    }
-
-    $button.textContent = name;
-
-    if (className) {
-      $button.classList.add(className);
-    }
-
-    $button.addEventListener('click', onClick);
-  };
-
-  this.render();
+  mount() {
+    this.$component.addEventListener('click', this.props.onClick);
+  }
 }
 
 export default Button;
