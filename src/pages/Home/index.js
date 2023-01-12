@@ -1,6 +1,6 @@
 import { getPostList } from '../../api/post';
 import { routeChange } from '../../router';
-import IconTextButton from '../../components/IconTextButton';
+import Button from '../../components/Button';
 import Post from '../../components/Post';
 import '../../css/home.scss';
 import Page from '../../components/Page';
@@ -23,20 +23,14 @@ class Home extends Page {
       return;
     }
 
-    new IconTextButton({
-      $target: this.querySelectorChild('.button-container'),
-      initialState: {
-        name: '새 글 작성하기',
-        className: 'basic',
-        onClick: () => this.navigate('/write'),
-      },
+    new Button(this.querySelectorChild('.button-container'), {
+      name: '새 글 작성하기',
+      className: 'basic',
+      onClick: () => this.navigate('/write'),
     });
 
     this.state.posts.map((post) => {
-      new Post({
-        $target: this.querySelectorChild('.post-list'),
-        initialState: { post },
-      });
+      new Post(this.querySelectorChild('.post-list'), { post });
     });
   }
 

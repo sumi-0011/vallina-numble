@@ -1,20 +1,12 @@
 import '../css/post.scss';
-import { routeChange } from '../router';
+import Component from './Component';
 
-function Post({ $target, initialState }) {
-  const $post = document.createElement('div');
-  $post.className = 'post';
+class Post extends Component {
+  view() {
+    const { postId, image, title, content } = this.props.post;
 
-  $target.appendChild($post);
-
-  this.state = initialState;
-
-  this.render = () => {
-    if (!this.state.post) return;
-
-    const { postId, image, title, content } = this.state.post;
-    $post.dataset.id = postId;
-    $post.innerHTML = `
+    return `
+    <div class="post" data-id="${postId}">
       <div class="post__img">
         <img src="${image}" />
       </div>
@@ -22,17 +14,16 @@ function Post({ $target, initialState }) {
         <div class="post__title">${title}</div>
         <div class="post__content">${content}</div>
       </div>
-    `;
-  };
+      </div>`;
+  }
 
-  this.render();
+  mount() {
+    this.$component.addEventListener('click', () => {
+      const { postId } = this.props.post;
 
-  $post.addEventListener('click', () => {
-    const { postId } = this.state.post;
-    console.log('post click', postId);
-
-    routeChange(`/post/${postId}`);
-  });
+      this.navigate(`/post/${postId}`);
+    });
+  }
 }
 
 export default Post;
