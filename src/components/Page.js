@@ -11,7 +11,7 @@ class Page {
   state;
   props;
   $target;
-  $component;
+  // $component;
 
   constructor($target, props) {
     this.$target = $target;
@@ -26,6 +26,14 @@ class Page {
   }
   init() {}
 
+  setTitle(title) {
+    document.title = title;
+  }
+
+  setClassName(className) {
+    this.$target.className = className;
+  }
+
   view() {
     return `<div></div>`;
   }
@@ -33,10 +41,9 @@ class Page {
   mount() {}
 
   render() {
-    this.$component = createElementFromHTML(this.view());
+    console.log('render: ');
+    this.$target.innerHTML = this.view();
     this.mount();
-    this.$target.innerHTML = '';
-    this.$target.appendChild(this.$component);
   }
 
   navigate(url, params) {
@@ -44,7 +51,7 @@ class Page {
   }
 
   querySelectorChild(selector) {
-    return this.$component.querySelector(selector);
+    return this.$target.querySelector(selector);
   }
 }
 

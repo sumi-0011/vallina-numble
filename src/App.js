@@ -24,7 +24,7 @@ function App({ $target }) {
       const [, , postId] = pathname.split('/');
       new Edit({ $target: $content, postId }).render();
     } else if (pathname === '/write') {
-      new WritingPage({ $target: $content }).render();
+      new WritingPage($content);
     }
   };
 
