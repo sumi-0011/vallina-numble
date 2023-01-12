@@ -19,7 +19,7 @@ function App({ $target }) {
       new Home({ $target: $content }).render();
     } else if (pathname.indexOf('post') === 1) {
       const [, , postId] = pathname.split('/');
-      new DetailPage({ $target: $content, postId }).render();
+      new DetailPage($content, { postId });
     } else if (pathname.indexOf('edit') === 1) {
       const [, , postId] = pathname.split('/');
       new Edit({ $target: $content, postId }).render();
