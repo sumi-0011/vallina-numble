@@ -24,19 +24,15 @@ class Detail extends Component {
   }
 
   mount() {
-    const $detail = this.$target.querySelector(`.${styled.detail}`);
-
-    new IconButton('button', $detail.querySelector('.bottom'), {
-      icon: 'modify',
-      onClick: () => {
-        console.log('mo');
-      },
-      className: 'modify-button',
+    const $iconWrapper = this.$component.querySelector('.bottom');
+    new IconButton($iconWrapper, {
+      icon: 'edit',
+      onClick: () => {},
     });
 
-    new IconButton('button', $detail.querySelector('.bottom'), {
-      icon: 'delete',
-      className: 'delete-button',
+    new IconButton($iconWrapper, {
+      icon: 'remove',
+      onClick: () => {},
     });
   }
 }

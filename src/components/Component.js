@@ -1,21 +1,23 @@
 import { routeChange } from '../router';
 
+function createElementFromHTML(htmlString) {
+  var div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+
+  return div.firstChild;
+}
+
 class Component {
   state;
   props;
   $target;
   $component;
 
-  constructor(elementType, $target, props) {
+  constructor($target, props) {
     this.$target = $target;
     this.props = props;
-    this.$component = document.createElement(elementType);
     this.render();
   }
-
-  // setAttribute(name, value) {
-  //   this.$component.setAttribute(name, value);
-  // }
 
   setState(nextState) {
     this.state = { ...this.state, ...nextState };
@@ -29,7 +31,7 @@ class Component {
   mount() {}
 
   render() {
-    this.$component.insertAdjacentHTML('beforeend', this.view());
+    this.$component = createElementFromHTML(this.view());
     this.$target.appendChild(this.$component);
     this.mount();
   }
