@@ -43,20 +43,22 @@ function DetailPage({ $target, postId }) {
     new Detail($page.querySelector('.detail-wrapper'), { postId, post });
 
     comments.map((comment) => {
-      new Comment({
-        $target: $page.querySelector('.comment-list'),
-        initialState: {
-          comment,
-        },
+      new Comment($page.querySelector('.comment-list'), {
+        comment,
         refetch: fetchPost,
       });
     });
 
-    new CommentInput({
-      $target: $page,
-      initialState: {
-        postId,
-      },
+    // new CommentInput({
+    //   $target: $page,
+    //   initialState: {
+    //     postId,
+    //   },
+    //   refetch: fetchPost,
+    // });
+
+    new CommentInput($page, {
+      postId,
       refetch: fetchPost,
     });
   };
