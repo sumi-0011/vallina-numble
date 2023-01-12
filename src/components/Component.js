@@ -39,6 +39,28 @@ class Component {
   navigate(url, params) {
     routeChange(url, params);
   }
+
+  querySelectorChild(selector) {
+    return this.$component.querySelector(selector);
+  }
+
+  onClick(selector, callback) {
+    this.querySelectorChild(selector).addEventListener('click', (e) => {
+      callback(e);
+    });
+  }
+
+  onChange(selector, callback) {
+    this.querySelectorChild(selector).addEventListener('change', (e) => {
+      callback(e);
+    });
+  }
+
+  onSubmit(selector, callback) {
+    this.querySelectorChild(selector).addEventListener('submit', (e) => {
+      callback(e);
+    });
+  }
 }
 
 export default Component;
