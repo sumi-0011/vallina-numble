@@ -40,7 +40,7 @@ function DetailPage({ $target, postId }) {
       <div class="comment-list ${styled['comment-list']}"></div>
     `;
 
-    new Detail('div', $page.querySelector('.detail-wrapper'), { postId, post });
+    new Detail($page.querySelector('.detail-wrapper'), { postId, post });
 
     comments.map((comment) => {
       new Comment({
