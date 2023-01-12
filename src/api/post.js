@@ -64,11 +64,18 @@ const editPost = async (postId, title, content, image) => {
     console.log('error: ', error);
   }
 };
-const deletePost = async (postId) => {
-  const res = await requestDELETE(`/post/${postId}`);
-  console.log('res: ', res);
 
-  return res;
+const deletePost = async (postId) => {
+  try {
+    const res = await requestDELETE(`/post/${postId}`);
+    if (res.code == 200) {
+      return true;
+    } else {
+      throw new Error('글 삭제에 실패하였습니다.');
+    }
+  } catch (error) {
+    throw error;
+  }
 };
 
 const cleanObj = (obj) => {
