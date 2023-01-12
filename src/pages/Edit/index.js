@@ -1,58 +1,18 @@
 import { editPost, getPost } from '../../api/post';
 import Button from '../../components/Button';
+import Page from '../../components/Page';
 import styled from '../../css/post.module.scss';
-
-function Edit({ $target, postId }) {
-  this.state = { postId };
-
-  const $page = document.createElement('div');
-  $target.appendChild($page);
-  $page.className = styled['edit-page'];
-
-  this.setState = (nextState) => {
-    this.state = { ...this.state, ...nextState };
-    this.render();
-  };
-
-  const fetchPost = async () => {
-    const { postId } = this.state;
-    if (!postId) return;
-    try {
-      const data = await getPost(postId);
-      console.log('data: ', data);
-      this.setState({ ...data.post });
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const handleSubmit = async () => {
-    console.log();
-    const { postId, title, content, image } = this.state;
-    await editPost(postId, title, content, image);
-
-    window.location.href = `/post/${postId}`;
-  };
-
-  const handleTitleChange = (e) => {
-    this.setState({ title: e.target.value });
-  };
-
-  const handleContentChange = (e) => {
-    this.setState({ content: e.target.value });
-  };
-
-  this.render = () => {
-    const { postId } = this.state;
-
-    if (!postId) {
-      return;
-    }
-
+class Edit extends Page {
+  init() {
+    this.setState({ title: '', content: '', image: null });
+    this.fetchPost();
+  }
+  view() {
     const { title, content, createdAt, image, updatedAt } = this.state;
 
-    $page.innerHTML = `
-      <div class="img-wrapper">
+    return `
+    <div>
+    <div class="img-wrapper">
         <img src="${image}" />
       </div>
       <div class="${styled.title} title">
@@ -69,26 +29,52 @@ function Edit({ $target, postId }) {
           placeholder="글 내용을 입력해주세요."
         >${content}</textarea>
       </div>
+      </div>
       <div class='submit-btn'></div>
     `;
+  }
 
-    const $title = $page.querySelector('.title input');
-    $title.addEventListener('change', handleTitleChange);
+  mount() {
+    const $page = this.$target;
 
-    const $content = $page.querySelector('.content textarea');
-    $content.addEventListener('change', handleContentChange);
-
-    new Button({
-      $target: $page.querySelector('.submit-btn'),
-      initialState: {
-        name: '글 수정하기',
-        onClick: handleSubmit,
-        className: 'basic',
-      },
+    this.querySelectorChild('.title input').addEventListener('change', (e) => {
+      this.setState({ title: e.target.value });
     });
-  };
 
-  fetchPost();
+    this.querySelectorChild('.content textarea').addEventListener(
+      'change',
+      (e) => {
+        this.setState({ content: e.target.value });
+      },
+    );
+
+    new Button(this.querySelectorChild('.submit-btn'), {
+      name: '글 수정하기',
+      onClick: this.handleSubmit.bind(this),
+      className: 'basic',
+    });
+  }
+
+  async fetchPost() {
+    const { postId } = this.props;
+    if (!postId) return;
+
+    try {
+      const data = await getPost(postId);
+      this.setState({ ...data.post });
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async handleSubmit() {
+    const { postId, title, content, image } = this.state;
+
+    if (!postId) return;
+    await editPost(postId, title, content, image);
+
+    this.navigate(`/post/${postId}`);
+  }
 }
 
 export default Edit;

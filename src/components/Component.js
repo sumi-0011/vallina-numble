@@ -16,10 +16,11 @@ class Component {
   constructor($target, props) {
     this.$target = $target;
     this.props = props;
+    this.init();
     this.render();
     this.$target.appendChild(this.$component);
   }
-
+  init() {}
   setState(nextState) {
     this.state = { ...this.state, ...nextState };
     this.render();

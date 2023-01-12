@@ -57,7 +57,7 @@ const editPost = async (postId, title, content, image) => {
     const body = { title, content, image };
     cleanObj(body);
 
-    const data = await requestPATCH(`/post/${postId}`, body);
+    const { data } = await requestPATCH(`/post/${postId}`, body);
 
     return data.post.postId;
   } catch (error) {

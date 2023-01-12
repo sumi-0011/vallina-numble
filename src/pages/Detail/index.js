@@ -6,18 +6,18 @@ import styled from '../../css/detail.module.scss';
 import Page from '../../components/Page';
 
 class DetailPage extends Page {
+  init() {
+    this.fetchPost();
+    this.setTitle(`detail-page`);
+  }
+
   view() {
     return `
-      <div class=${styled['detail-page']}>
         <div class="detail-wrapper"></div>
         <hr/>
         <div class="comment-list ${styled['comment-list']}"></div>
-      </div>
+        <div class="comment-input-wrapper"></div>
     `;
-  }
-
-  async init() {
-    this.fetchPost();
   }
 
   mount() {
@@ -25,7 +25,7 @@ class DetailPage extends Page {
     const { post, comments } = this.state;
     const { postId } = this.props;
 
-    new Detail(this.$component.querySelector('.detail-wrapper'), {
+    new Detail(this.$target.querySelector('.detail-wrapper'), {
       postId,
       post,
     });
@@ -37,7 +37,7 @@ class DetailPage extends Page {
       });
     });
 
-    new CommentInput(this.$component, {
+    new CommentInput(this.querySelectorChild('.comment-input-wrapper'), {
       postId,
       refetch: this.fetchPost.bind(this),
     });

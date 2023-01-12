@@ -1,9 +1,13 @@
-import SendIcon from '../../components/icons/SendIcon';
 import { addComment } from '../../api/comment';
-import styled from '../../css/comment.module.scss';
+import SendIcon from '../../components/icons/SendIcon';
 import Component from '../../components/Component';
+import styled from '../../css/comment.module.scss';
 
 class CommentInput extends Component {
+  init() {
+    this.setState({ value: '' });
+  }
+
   view() {
     return `
       <div class="${styled['input-wrapper']}">
@@ -25,6 +29,8 @@ class CommentInput extends Component {
 
   async clickButton() {
     if (!this.props.postId) return;
+    if (!this.state.value) return;
+
     try {
       const { postId, refetch } = this.props;
       const { value } = this.state;
