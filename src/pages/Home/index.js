@@ -3,56 +3,49 @@ import { routeChange } from '../../router';
 import IconTextButton from '../../components/IconTextButton';
 import Post from '../../components/Post';
 import '../../css/home.scss';
+import Page from '../../components/Page';
 
-function Home({ $target, initialState }) {
-  this.state = initialState;
+class Home extends Page {
+  view() {
+    return `
+      <div>
+        <div class="button-container"></div>
+        <div class="post-list"></div>
+      </div>
+    `;
+  }
+  init() {
+    this.fetchPosts();
+  }
 
-  const $page = document.createElement('div');
-  $target.appendChild($page);
-
-  this.setState = (nextState) => {
-    this.state = { ...this.state, ...nextState };
-    this.render();
-  };
-
-  const fetchPosts = async () => {
-    const data = await getPostList();
-
-    this.setState({ posts: data.posts });
-  };
-
-  const newPostBtnClick = () => {
-    routeChange('/write');
-  };
-
-  this.render = () => {
+  mount() {
     if (!this.state?.posts) {
       return;
     }
 
-    $page.innerHTML = `
-      <div class="button-container"></div>
-      <div class="post-list"></div>
-    `;
-
     new IconTextButton({
-      $target: $page.querySelector('.button-container'),
+      $target: this.querySelectorChild('.button-container'),
       initialState: {
         name: '새 글 작성하기',
         className: 'basic',
-        onClick: newPostBtnClick,
+        onClick: () => this.navigate('/write'),
       },
     });
 
     this.state.posts.map((post) => {
       new Post({
-        $target: $page.querySelector('.post-list'),
+        $target: this.querySelectorChild('.post-list'),
         initialState: { post },
       });
     });
-  };
+  }
 
-  fetchPosts();
+  async fetchPosts() {
+    const data = await getPostList();
+    this.setState({ posts: data.posts });
+  }
+
+  newPostBtnClick() {}
 }
 
 export default Home;
