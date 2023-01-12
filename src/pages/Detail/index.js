@@ -36,6 +36,7 @@ class DetailPage extends Page {
         refetch: this.fetchPost.bind(this),
       });
     });
+
     new CommentInput(this.$component, {
       postId,
       refetch: this.fetchPost.bind(this),
