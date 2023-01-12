@@ -24,15 +24,21 @@ class Detail extends Component {
   }
 
   mount() {
+    const { title, postId, content, createdAt, image } = this.props.post;
+
     const $iconWrapper = this.$component.querySelector('.bottom');
     new IconButton($iconWrapper, {
       icon: 'edit',
-      onClick: () => {},
+      onClick: () => {
+        this.navigate(`/edit/${postId}`);
+      },
     });
 
     new IconButton($iconWrapper, {
       icon: 'remove',
-      onClick: () => {},
+      onClick: () => {
+        // this.navigate(`/edit/${postId}`);
+      },
     });
   }
 }

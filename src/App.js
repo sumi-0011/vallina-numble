@@ -22,7 +22,7 @@ function App({ $target }) {
       new DetailPage($content, { postId });
     } else if (pathname.indexOf('edit') === 1) {
       const [, , postId] = pathname.split('/');
-      new Edit({ $target: $content, postId }).render();
+      new Edit($content, { postId });
     } else if (pathname === '/write') {
       new WritingPage($content);
     }
