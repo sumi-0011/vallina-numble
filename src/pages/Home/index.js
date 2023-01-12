@@ -3,7 +3,7 @@ import { routeChange } from '../../router';
 import Button from '../../components/Button';
 import Post from './Post';
 import '../../css/home.scss';
-import Page from '../../components/Page';
+import Page from '../../components/common/Page';
 
 class Home extends Page {
   view() {

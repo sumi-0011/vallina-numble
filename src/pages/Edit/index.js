@@ -1,7 +1,8 @@
 import { editPost, getPost } from '../../api/post';
 import Button from '../../components/Button';
-import Page from '../../components/Page';
+import Page from '../../components/common/Page';
 import styled from '../../css/post.module.scss';
+
 class Edit extends Page {
   init() {
     this.setState({ title: '', content: '', image: null });
@@ -11,32 +12,28 @@ class Edit extends Page {
     const { title, content, createdAt, image, updatedAt } = this.state;
 
     return `
-    <div>
-    <div class="img-wrapper">
-        <img src="${image}" />
-      </div>
-      <div class="${styled.title} title">
-        <h2 class"${styled.heading}">제목</h2>
-        <input type="text" placeholder="글 제목을 입력해주세요" value='${title}'
-         />
-      </div>
-      <div class="${styled.content} content">
-
-        <h2 class"${styled.heading}">내용</h2>
-        <textarea
-          cols="30"
-          rows="10"
-          placeholder="글 내용을 입력해주세요."
-        >${content}</textarea>
-      </div>
+      <div>
+        <div class="img-wrapper">
+          <img src="${image}" />
+        </div>
+        <div class="${styled.title} title">
+          <h2 class"${styled.heading}">제목</h2>
+          <input type="text" placeholder="글 제목을 입력해주세요" value='${title}'/>
+        </div>
+        <div class="${styled.content} content">
+          <h2 class"${styled.heading}">내용</h2>
+          <textarea
+            cols="30"
+            rows="10"
+            placeholder="글 내용을 입력해주세요."
+          >${content}</textarea>
+        </div>
       </div>
       <div class='submit-btn'></div>
     `;
   }
 
   mount() {
-    const $page = this.$target;
-
     this.querySelectorChild('.title input').addEventListener('change', (e) => {
       this.setState({ title: e.target.value });
     });
@@ -69,10 +66,9 @@ class Edit extends Page {
 
   async handleSubmit() {
     const { postId, title, content, image } = this.state;
-
     if (!postId) return;
-    await editPost(postId, title, content, image);
 
+    await editPost(postId, title, content, image);
     this.navigate(`/post/${postId}`);
   }
 }

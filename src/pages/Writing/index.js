@@ -1,7 +1,7 @@
 import { getRandomPhoto } from '../../api/photo';
 import { addPost } from '../../api/post';
 import Button from '../../components/Button';
-import Page from '../../components/Page';
+import Page from '../../components/common/Page';
 import '../../css/new.scss';
 
 class Writing extends Page {
@@ -10,19 +10,18 @@ class Writing extends Page {
   }
 
   view() {
-    const { title, content, img } = this.state;
-
+    const { title, content } = this.state;
     return ` 
       <div>
-      <div class="new__img-wrapper"></div>
-      <div class="new__title">
-        <h2>제목</h2>
-        <input type="text" placeholder="글 제목을 입력해주세요" value='${title}' />
-      </div>
-      <div class="new__content">
-        <h2>내용</h2>
-        <textarea cols="30" rows="10" placeholder="글 내용을 입력해주세요." >${content}</textarea>
-      </div>
+        <div class="new__img-wrapper"></div>
+        <div class="new__title">
+          <h2>제목</h2>
+          <input type="text" placeholder="글 제목을 입력해주세요" value='${title}' />
+        </div>
+        <div class="new__content">
+          <h2>내용</h2>
+          <textarea cols="30" rows="10" placeholder="글 내용을 입력해주세요." >${content}</textarea>
+        </div>
       </div>
       <div class='submit-btn'></div>
       `;
@@ -52,8 +51,8 @@ class Writing extends Page {
 
     new Button(this.querySelectorChild('.submit-btn'), {
       name: loading ? '로딩중' : '등록하기',
-      className: 'basic',
       onClick: this.handleSubmit.bind(this),
+      className: 'basic',
     });
 
     this.querySelectorChild('.new__title input').addEventListener(
