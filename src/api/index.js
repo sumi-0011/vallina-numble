@@ -5,9 +5,15 @@ export const requestGET = async (url, options = {}) => {
     const response = await fetch(`${BASE_PATH}${url}`, options);
 
     const json = await response.json();
+    console.log('json: ', json);
     if (response.ok) {
       return json;
     }
+
+    if (json.error) {
+      throw new Error(json.error);
+    }
+
     throw new Error('API 통신 실패');
   } catch (error) {
     throw error;

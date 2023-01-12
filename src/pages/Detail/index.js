@@ -49,7 +49,12 @@ class DetailPage extends Page {
       const data = await getPost(postId);
       this.setState({ post: data.post, comments: data.comments });
     } catch (error) {
-      alert(error);
+      if (error.message === 'Invalid post id') {
+        alert('글을 불러올 수 없습니다. ');
+      } else {
+        alert(error);
+      }
+      this.navigate('/');
     }
   }
 }

@@ -1,9 +1,13 @@
 import { requestGET, requestPATCH, requestPOST, requestDELETE } from '.';
 
 const getPost = async (postId) => {
-  const { data } = await requestGET(`/post/${postId}`);
+  try {
+    const { data } = await requestGET(`/post/${postId}`);
 
-  return data;
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 function comparePostID(a, b) {
