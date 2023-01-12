@@ -16,7 +16,7 @@ function App({ $target }) {
     const $content = $target.querySelector('.content');
 
     if (pathname === '/') {
-      new Home({ $target: $content }).render();
+      new Home($content);
     } else if (pathname.indexOf('post') === 1) {
       const [, , postId] = pathname.split('/');
       new DetailPage($content, { postId });
