@@ -2,6 +2,7 @@ import SendIcon from '../../components/icons/SendIcon';
 import { addComment } from '../../api/comment';
 import styled from '../../css/comment.module.scss';
 import Component from '../../components/Component';
+
 class CommentInput extends Component {
   view() {
     return `
@@ -13,17 +14,13 @@ class CommentInput extends Component {
   }
 
   mount() {
-    const $submitBtn = this.$component.querySelector(
-      `.${styled['submit-btn']}`,
-    );
+    const $submitBtn = this.querySelectorChild(`.${styled['submit-btn']}`);
     new SendIcon({ $target: $submitBtn, className: 'send-icon' });
-    const $input = this.$component.querySelector(`.${styled.input}`);
 
-    $input.addEventListener('change', (e) => {
+    this.onClick(`.${styled['submit-btn']}`, this.clickButton.bind(this));
+    this.onChange(`.${styled.input}`, (e) => {
       this.setState({ value: e.target.value });
     });
-
-    $submitBtn.addEventListener('click', this.clickButton.bind(this));
   }
 
   async clickButton() {
