@@ -17,6 +17,7 @@ class Component {
     this.$target = $target;
     this.props = props;
     this.render();
+    this.$target.appendChild(this.$component);
   }
 
   setState(nextState) {
@@ -32,36 +33,11 @@ class Component {
 
   render() {
     this.$component = createElementFromHTML(this.view());
-    this.$target.appendChild(this.$component);
     this.mount();
   }
 
   navigate(url, params) {
     routeChange(url, params);
-  }
-
-  onClick(selector, callback) {
-    $currentTarget = this.$component.querySelector(selector);
-
-    $currentTarget.addEventListener('click', (e) => {
-      callback(e);
-    });
-  }
-
-  onChange(selector, callback) {
-    $currentTarget = this.$component.querySelector(selector);
-
-    $currentTarget.addEventListener('change', (e) => {
-      callback(e);
-    });
-  }
-
-  onSubmit(selector, callback) {
-    $currentTarget = this.$component.querySelector(selector);
-
-    $currentTarget.addEventListener('submit', (e) => {
-      callback(e);
-    });
   }
 }
 
