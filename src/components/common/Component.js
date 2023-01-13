@@ -11,16 +11,17 @@ class Component {
   state;
   props;
   $target;
-  $component;
+  // $component;
 
   constructor($target, props) {
     this.$target = $target;
     this.props = props;
     this.init();
     this.render();
-    this.$target.appendChild(this.$component);
+    // this.$target.appendChild(this.$component);
   }
   init() {}
+
   setState(nextState) {
     this.state = { ...this.state, ...nextState };
     this.render();
@@ -33,7 +34,9 @@ class Component {
   mount() {}
 
   render() {
-    this.$component = createElementFromHTML(this.view());
+    this.$target.innerHTML = this.view();
+
+    // this.$component = createElementFromHTML(this.view());
     this.mount();
   }
 
@@ -42,7 +45,7 @@ class Component {
   }
 
   querySelectorChild(selector) {
-    return this.$component.querySelector(selector);
+    return this.$target.querySelector(selector);
   }
 }
 
