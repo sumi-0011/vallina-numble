@@ -40,8 +40,6 @@ class Home extends Page {
     const data = await getPostList();
     this.setState({ posts: data.posts });
   }
-
-  newPostBtnClick() {}
 }
 
 export default Home;

@@ -18,10 +18,10 @@ class Post extends Component {
   }
 
   mount() {
-    // this.$component.addEventListener('click', () => {
-    //   const { postId } = this.props.post;
-    //   this.navigate(`/post/${postId}`);
-    // });
+    this.$target.addEventListener('click', () => {
+      const { postId } = this.props.post;
+      this.navigate(`/post/${postId}`);
+    });
   }
 }
 
