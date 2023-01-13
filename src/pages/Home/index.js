@@ -30,7 +30,9 @@ class Home extends Page {
     });
 
     this.state.posts.map((post) => {
-      new Post(this.querySelectorChild('.post-list'), { post });
+      const $post = document.createElement('div');
+      this.querySelectorChild('.post-list').appendChild($post);
+      new Post($post, { post });
     });
   }
 
