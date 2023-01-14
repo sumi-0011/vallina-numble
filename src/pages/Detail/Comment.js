@@ -1,27 +1,23 @@
 import { deleteComment } from '../../api/comment';
-import styled from '../../css/comment.module.scss';
 import XIcon from '../../components/icons/XIcon';
 import Component from '../../components/common/Component';
+import '../../css/comment.scss';
 
 class Comment extends Component {
   view() {
-    const { commentId, postId } = this.props.comment;
+    const { commentId, postId, content } = this.props.comment;
     return `
-      <div class="${styled['comment']}" data-id="${commentId}" data-post-id="${postId}">
-        <div class="${styled.content}"></div>
-        <button class="${styled['delete-btn']}"></button>
+      <div class="comment" data-id="${commentId}" data-post-id="${postId}">
+        <div class="content">${content}</div>
+        <button class="delete-btn"></button>
       </div>
     `;
   }
 
   mount() {
-    const { content } = this.props.comment;
+    new XIcon(this.querySelectorChild(`.delete-btn`));
 
-    this.querySelectorChild(`.${styled.content}`).innerText = content;
-
-    new XIcon(this.querySelectorChild(`.${styled['delete-btn']}`));
-
-    this.querySelectorChild(`.${styled['delete-btn']}`).addEventListener(
+    this.querySelectorChild(`.delete-btn`).addEventListener(
       'click',
       this.handleDeleteComment.bind(this),
     );

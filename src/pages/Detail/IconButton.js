@@ -1,11 +1,10 @@
 import EditIcon from '../../components/icons/EditIcon';
 import RemoveIcon from '../../components/icons/RemoveIcon';
-import styled from '../../css/button.module.scss';
 import Component from '../../components/common/Component';
 
 class IconButton extends Component {
   view() {
-    return `<button class='${styled['icon-button']}'></button>`;
+    return `<button class='icon-button'></button>`;
   }
 
   mount() {
@@ -13,16 +12,16 @@ class IconButton extends Component {
 
     switch (icon) {
       case 'edit':
-        new EditIcon(this.$component);
+        new EditIcon(this.$target);
         break;
       case 'remove':
-        new RemoveIcon(this.$component);
+        new RemoveIcon(this.$target);
         break;
       default:
         break;
     }
 
-    this.$component.addEventListener('click', onClick);
+    this.$target.addEventListener('click', onClick);
   }
 }
 

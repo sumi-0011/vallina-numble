@@ -1,4 +1,3 @@
-import styled from '../../css/detail.module.scss';
 import IconButton from './IconButton';
 import Component from '../../components/common/Component';
 import { deletePost } from '../../api/post';
@@ -6,18 +5,23 @@ import { deletePost } from '../../api/post';
 class Detail extends Component {
   view() {
     const { title, postId, content, createdAt, image } = this.props.post;
+    console.log('createdAt: ', createdAt);
+    const date = new Date(createdAt);
     return `
-      <div class="${styled.detail}">
-        <div class=${styled.img}>
+      <div class="detail">
+        <div class="img">
           <img src="${image}" />
         </div>
         <div class="detail__wrapper">
           <div class="top">
-            <h2 class="${styled.title}">${title}</h2>
-            <span class="${styled.date}">${createdAt}</span>
+            <h2 class="title">${title}</h2>
+            <span class="date">${date.toLocaleString()}</span>
           </div>
-          <div class="${styled.content}">${content}</div>
-          <div class="${styled.bottom} bottom"></div>
+          <div class="content">${content}</div>
+          <div class="bottom">
+            <div class='edit-btn-wrapper'></div>
+            <div class='remove-btn-wrapper'></div>
+          </div>
         </div>
       </div>
     `;
@@ -26,15 +30,21 @@ class Detail extends Component {
   mount() {
     const { postId } = this.props.post;
 
-    const $iconWrapper = this.$component.querySelector('.bottom');
-    new IconButton($iconWrapper, {
+    const $iconWrapper2 = this.$target.querySelector(
+      '.bottom .edit-btn-wrapper',
+    );
+    const $iconWrapper1 = this.$target.querySelector(
+      '.bottom .remove-btn-wrapper',
+    );
+
+    new IconButton($iconWrapper2, {
       icon: 'edit',
       onClick: () => {
         this.navigate(`/edit/${postId}`);
       },
     });
 
-    new IconButton($iconWrapper, {
+    new IconButton($iconWrapper1, {
       icon: 'remove',
       onClick: () => {
         this.handleRemovePost();

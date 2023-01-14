@@ -1,7 +1,6 @@
 import { addComment } from '../../api/comment';
 import SendIcon from '../../components/icons/SendIcon';
 import Component from '../../components/common/Component';
-import styled from '../../css/comment.module.scss';
 
 class CommentInput extends Component {
   init() {
@@ -10,16 +9,16 @@ class CommentInput extends Component {
 
   view() {
     return `
-      <div class="${styled['input-wrapper']}">
-        <input type="text" class="${styled.input}"/>  
-        <button class="${styled['submit-btn']}"></button>
+      <div class="input-wrapper">
+        <input type="text" class="input" value="${this.state.value}"/>  
+        <button class="submit-btn"></button>
       </div>
   `;
   }
 
   mount() {
-    const $submitBtn = this.querySelectorChild(`.${styled['submit-btn']}`);
-    const $input = this.querySelectorChild(`.${styled.input}`);
+    const $submitBtn = this.querySelectorChild(`.submit-btn`);
+    const $input = this.querySelectorChild(`.input`);
 
     new SendIcon($submitBtn);
     $submitBtn.addEventListener('click', this.clickButton.bind(this));

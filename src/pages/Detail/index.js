@@ -2,8 +2,8 @@ import Comment from './Comment';
 import Detail from './Detail';
 import { getPost } from '../../api/post';
 import CommentInput from './CommentInput';
-import styled from '../../css/detail.module.scss';
 import Page from '../../components/common/Page';
+import '../../css/detail.scss';
 
 class DetailPage extends Page {
   init() {
@@ -14,7 +14,7 @@ class DetailPage extends Page {
     return `
       <div class="detail-wrapper"></div>
       <hr/>
-      <div class="comment-list ${styled['comment-list']}"></div>
+      <div class="comment-list"></div>
       <div class="comment-input-wrapper"></div>
     `;
   }
@@ -30,7 +30,9 @@ class DetailPage extends Page {
     });
 
     comments.map((comment) => {
-      new Comment(this.querySelectorChild('.comment-list'), {
+      const $comment = document.createElement('div');
+      this.querySelectorChild('.comment-list').appendChild($comment);
+      new Comment($comment, {
         comment,
         refetch: this.fetchPost.bind(this),
       });
@@ -54,7 +56,7 @@ class DetailPage extends Page {
       } else {
         alert(error);
       }
-      this.navigate('/');
+      // this.navigate('/');
     }
   }
 }

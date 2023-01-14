@@ -8,7 +8,8 @@ class Button extends Component {
   }
 
   mount() {
-    this.$target.addEventListener('click', this.props.onClick);
+    const { onClick } = this.props;
+    this.$target.addEventListener('click', onClick);
   }
 }
 
