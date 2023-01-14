@@ -54,7 +54,11 @@ hr {
   button {
     background: none;
     border: none;
+    cursor: pointer;
   }
+}
+.icon {
+  cursor: pointer;
 }
 @include desktop {
   #app {

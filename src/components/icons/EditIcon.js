@@ -9,6 +9,9 @@ class EditIcon extends Component {
       </svg>
     `;
   }
+  mount() {
+    this.$target.classList.add('icon');
+  }
 }
 
 export default EditIcon;

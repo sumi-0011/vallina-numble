@@ -26,7 +26,7 @@ class Edit extends Page {
           >${content}</textarea>
         </div>
       </div>
-      <div class='submit-btn'></div>
+      <div class='edit-btn'></div>
     `;
   }
 
@@ -42,7 +42,7 @@ class Edit extends Page {
       },
     );
 
-    new Button(this.querySelectorChild('.submit-btn'), {
+    new Button(this.querySelectorChild('.edit-btn'), {
       name: '글 수정하기',
       onClick: this.handleSubmit.bind(this),
       className: 'basic',

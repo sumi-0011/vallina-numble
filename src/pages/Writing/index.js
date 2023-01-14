@@ -4,6 +4,7 @@ import GalleryIcon from '../../components/icons/GalleryIcon';
 import Button from '../../components/Button';
 import Page from '../../components/common/Page';
 import '../../css/new.scss';
+
 class Writing extends Page {
   init() {
     this.setState({ title: '', content: '', img: null });
