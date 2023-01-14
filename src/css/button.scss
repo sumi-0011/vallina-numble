@@ -1,6 +1,6 @@
 .button {
   width: 100%;
-  height: 67px;
+  font-family: 'Pretendard';
 
   border: none;
   border-radius: 12px;
@@ -10,11 +10,25 @@
   color: #454545;
   background-color: transparent;
   cursor: pointer;
+
+  font-size: 16px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.button-container {
+  margin: 0px 0 25px;
 }
 
 .basic {
   background-color: #bb2649;
   color: #fff;
+  border: 1px solid #840925;
+  letter-spacing: 1.5px;
+
+  &:hover {
+    background: lighten(#bb2649, 5%);
+  }
 }
 
 .delete-btn {

@@ -1,3 +1,6 @@
+@import './mixin';
+@import url('https://webfontworld.github.io/pretendard/Pretendard.css');
+
 * {
   box-sizing: border-box;
 }
@@ -5,14 +8,21 @@
 html,
 body {
   margin: 0;
-  background-color: rgb(218, 207, 207);
+  font-family: 'Pretendard';
+  letter-spacing: -0.25px;
+}
+input,
+textarea {
+  font-family: 'Pretendard';
 }
 hr {
+  $gray: #525252;
+  color: $gray;
   width: 100%;
 }
 
 #app {
-  width: 360px;
+  width: 100%;
   margin: auto;
   box-sizing: border-box;
   padding: 18px;
@@ -21,11 +31,33 @@ hr {
   flex-direction: column;
   min-height: 100vh;
   height: fit-content;
-  .content {
-    height: fit-content;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+}
+.content {
+  height: fit-content;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #353535;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  align-items: center;
+  margin-bottom: 10px;
+  button {
+    background: none;
+    border: none;
+  }
+}
+@include desktop {
+  #app {
+    padding: 30px;
   }
 }

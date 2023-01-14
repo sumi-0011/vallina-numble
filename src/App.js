@@ -3,6 +3,7 @@ import DetailPage from './pages/Detail';
 import WritingPage from './pages/Writing';
 import { init } from './router';
 import Edit from './pages/Edit';
+import Header from './components/Header';
 
 class App {
   $target;
@@ -17,11 +18,13 @@ class App {
     const { pathname } = location;
 
     this.$target.innerHTML = ` 
-        <header></header>
+        <header class='header'></header>
         <div class='content'></div>
    `;
 
     const $content = this.$target.querySelector('.content');
+    const $header = this.$target.querySelector('.header');
+    new Header($header);
 
     if (pathname === '/') {
       new Home($content, { title: 'Home' });

@@ -1,5 +1,4 @@
 import { getPostList } from '../../api/post';
-import { routeChange } from '../../router';
 import Button from '../../components/Button';
 import Post from './Post';
 import '../../css/home.scss';
@@ -31,6 +30,7 @@ class Home extends Page {
 
     this.state.posts.map((post) => {
       const $post = document.createElement('div');
+      $post.className = 'post-wrapper';
       this.querySelectorChild('.post-list').appendChild($post);
       new Post($post, { post });
     });
