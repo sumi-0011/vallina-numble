@@ -11,6 +11,9 @@ class BackIcon extends Component {
     
     `;
   }
+  mount() {
+    this.$target.classList.add('icon');
+  }
 }
 
 export default BackIcon;

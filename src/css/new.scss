@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     img {
       width: 100%;
       height: 100%;
@@ -62,9 +63,4 @@
       resize: none;
     }
   }
-}
-
-.loading {
-  text-align: center;
-  position: absolute;
 }
