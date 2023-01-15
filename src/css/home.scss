@@ -8,8 +8,8 @@
 
 .post-wrapper {
   max-width: 100%;
-  width: 100%;
   min-width: 100%;
+  width: 100%;
 
   cursor: pointer;
   &:hover {
@@ -22,13 +22,13 @@
   $h: 110px;
 
   display: flex;
-  border: 1px solid #e2e2e2;
+  border: none;
   border-radius: 10px;
+
   overflow: hidden;
   height: $h;
   box-shadow: 5px 6px 13px 1px rgb(0 0 0 / 9%);
 
-  border: none;
   &:hover {
     box-shadow: 10px 6px 13px 1px rgb(0 0 0 / 9%);
   }
@@ -109,6 +109,7 @@
     }
   }
 }
+
 @include desktop {
   .post-list {
     display: grid;

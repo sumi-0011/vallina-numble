@@ -9,10 +9,8 @@ class CommentInput extends Component {
 
   view() {
     return `
-      <div class="input-wrapper">
-        <input type="text" class="input" value="${this.state.value}"/>  
-        <button class="submit-btn"></button>
-      </div>
+      <input type="text" class="input" />  
+      <button class="submit-btn"></button>
   `;
   }
 
@@ -21,16 +19,25 @@ class CommentInput extends Component {
     const $input = this.querySelectorChild(`.input`);
 
     new SendIcon($submitBtn);
-    $submitBtn.addEventListener('click', this.clickButton.bind(this));
+    $submitBtn.addEventListener(
+      'click',
+      this.handleCommentSubmitBtnClick.bind(this),
+    );
 
     $input.addEventListener('change', (e) => {
       this.setState({ value: e.target.value });
     });
+
+    $input.addEventListener('keydown', (e) => {
+      if (e.keyCode === 13) {
+        this.setState({ value: e.target.value });
+        this.handleCommentSubmitBtnClick();
+      }
+    });
   }
 
-  async clickButton() {
-    if (!this.props.postId) return;
-    if (!this.state.value) return;
+  async handleCommentSubmitBtnClick() {
+    if (!this.props.postId || !this.state.value) return;
 
     try {
       const { postId, refetch } = this.props;

@@ -6,23 +6,21 @@ import { deletePost } from '@api/post';
 class Detail extends Component {
   view() {
     const { title, content, createdAt, image } = this.props.post;
-    console.log('createdAt: ', createdAt);
     const date = new Date(createdAt);
+
     return `
-      <div class="detail">
-        <div class="img">
-          <img src="${image}" />
+      <div class="img">
+        <img src="${image}" />
+      </div>
+      <div class="detail__wrapper">
+        <div class="top">
+          <h2 class="title">${title}</h2>
+          <span class="date">${date.toLocaleString()}</span>
         </div>
-        <div class="detail__wrapper">
-          <div class="top">
-            <h2 class="title">${title}</h2>
-            <span class="date">${date.toLocaleString()}</span>
-          </div>
-          <div class="content">${content}</div>
-          <div class="bottom">
-            <div class='edit-btn-wrapper  '></div>
-            <div class='remove-btn-wrapper '></div>
-          </div>
+        <div class="content">${content}</div>
+        <div class="bottom">
+          <div class='edit-btn-wrapper'></div>
+          <div class='remove-btn-wrapper'></div>
         </div>
       </div>
     `;

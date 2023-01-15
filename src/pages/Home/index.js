@@ -5,17 +5,16 @@ import { getPostList } from '@api/post';
 import '@css/home.scss';
 
 class Home extends Page {
-  view() {
-    return `
-      <div>
-        <div class="button-container"></div>
-        <div class="post-list"></div>
-      </div>
-    `;
-  }
-
   init() {
     this.fetchPosts();
+    this.setTitle('home');
+  }
+
+  view() {
+    return `
+      <div class="button-container"></div>
+      <div class="post-list"></div>
+    `;
   }
 
   mount() {
@@ -33,13 +32,14 @@ class Home extends Page {
       const $post = document.createElement('div');
       $post.className = 'post-wrapper';
       this.querySelectorChild('.post-list').appendChild($post);
+
       new Post($post, { post });
     });
   }
 
   async fetchPosts() {
-    const data = await getPostList();
-    this.setState({ posts: data.posts });
+    const { posts } = await getPostList();
+    this.setState({ posts: posts });
   }
 }
 

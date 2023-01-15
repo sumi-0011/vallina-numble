@@ -10,9 +10,8 @@ $gray: #525252;
   padding: 12px 10px;
   display: flex;
   flex-direction: column;
-
-  gap: 12px;
   flex: 1;
+  gap: 12px;
 }
 
 .detail {
@@ -47,9 +46,10 @@ $gray: #525252;
   }
 
   .bottom {
-    margin-top: 30px;
     display: flex;
     justify-content: flex-end;
     gap: 12px;
+
+    margin-top: 30px;
   }
 }

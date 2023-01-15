@@ -6,6 +6,7 @@ class Edit extends Page {
   init() {
     this.setState({ title: '', content: '', image: null });
     this.fetchPost();
+    this.setTitle('edit-page');
   }
 
   view() {
@@ -19,7 +20,7 @@ class Edit extends Page {
         <div class=" title">
           <input type="text" placeholder="제목을 입력해주세요" value='${title}'/>
         </div>
-        <div class=" content">
+        <div class="content">
           <textarea
             cols="30"
             rows="10"
