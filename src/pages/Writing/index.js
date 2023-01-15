@@ -1,6 +1,7 @@
 import { getRandomPhoto } from '@api/photo';
 import { addPost } from '@api/post';
 import GalleryIcon from '@components/icons/GalleryIcon';
+import ImageBox from '@pages/writing/ImageBox';
 import Button from '@components/Button';
 import Page from '@core/Page';
 import '@css/writing.scss';
@@ -36,15 +37,10 @@ class Writing extends Page {
     const $imgWrapper = this.querySelectorChild('.writing__img-wrapper');
 
     if (img) {
-      new Button($imgWrapper, {
-        name: 'x',
-        className: 'delete-btn',
-        onClick: this.handleDeleteBtn.bind(this),
+      new ImageBox($imgWrapper, {
+        img,
+        onDelete: this.handleDeleteBtn.bind(this),
       });
-
-      const $img = document.createElement('img');
-      $imgWrapper.appendChild($img);
-      $img.src = this.state.img;
     } else {
       new GalleryIcon($imgWrapper, {});
       $imgWrapper.addEventListener('click', () => {

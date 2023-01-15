@@ -1,26 +1,27 @@
 import Page from '@core/Page';
 import Button from '@components/Button';
 import { editPost, getPost } from '@api/post';
+import '@css/edit.scss';
 
 class Edit extends Page {
   init() {
     this.setState({ title: '', content: '', image: null });
-    this.fetchPost();
     this.setTitle('edit-page');
+    this.fetchPost();
   }
 
   view() {
     const { title, content, image } = this.state;
 
     return `
-      <div class='edit-page'>
-        <div class="img-wrapper">
+      <div class='edit'>
+        <div class="edit__img-wrapper">
           <img src="${image}" />
         </div>
-        <div class=" title">
+        <div class="edit__title">
           <input type="text" placeholder="제목을 입력해주세요" value='${title}'/>
         </div>
-        <div class="content">
+        <div class="edit__content">
           <textarea
             cols="30"
             rows="10"
@@ -28,23 +29,26 @@ class Edit extends Page {
           >${content}</textarea>
         </div>
       </div>
-      <div class='edit-btn'></div>
+      <div class='edit__btn'></div>
     `;
   }
 
   mount() {
-    this.querySelectorChild('.title input').addEventListener('change', (e) => {
-      this.setState({ title: e.target.value });
-    });
+    this.querySelectorChild('.edit__title input').addEventListener(
+      'change',
+      (e) => {
+        this.setState({ title: e.target.value });
+      },
+    );
 
-    this.querySelectorChild('.content textarea').addEventListener(
+    this.querySelectorChild('.edit__content textarea').addEventListener(
       'change',
       (e) => {
         this.setState({ content: e.target.value });
       },
     );
 
-    new Button(this.querySelectorChild('.edit-btn'), {
+    new Button(this.querySelectorChild('.edit__btn'), {
       name: '글 수정하기',
       onClick: this.handleSubmit.bind(this),
       className: 'basic',

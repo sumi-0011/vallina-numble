@@ -1,25 +1,17 @@
 import { routeChange } from '@/router';
 
-function createElementFromHTML(htmlString) {
-  var div = document.createElement('div');
-  div.innerHTML = htmlString.trim();
-
-  return div.firstChild;
-}
-
 class Component {
   state;
   props;
   $target;
-  // $component;
 
   constructor($target, props) {
     this.$target = $target;
     this.props = props;
     this.init();
     this.render();
-    // this.$target.appendChild(this.$component);
   }
+
   init() {}
 
   setState(nextState) {
@@ -35,8 +27,6 @@ class Component {
 
   render() {
     this.$target.innerHTML = this.view();
-
-    // this.$component = createElementFromHTML(this.view());
     this.mount();
   }
 
