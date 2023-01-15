@@ -13,6 +13,7 @@ class Home extends Page {
       </div>
     `;
   }
+
   init() {
     this.fetchPosts();
   }

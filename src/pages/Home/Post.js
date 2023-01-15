@@ -10,10 +10,10 @@ class Post extends Component {
         <div class="post__img">
           <img src="${image}" />
         </div>
-      <div class="post__inner">
-        <div class="post__title">${title}</div>
-        <div class="post__content">${content}</div>
-      </div>
+        <div class="post__inner">
+          <div class="post__title">${title}</div>
+          <div class="post__content">${content}</div>
+        </div>
       </div>`;
   }
 
