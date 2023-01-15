@@ -1,6 +1,6 @@
-import IconButton from './IconButton';
-import Component from '../../components/common/Component';
-import { deletePost } from '../../api/post';
+import Component from '@core/Component';
+import IconButton from '@pages/detail/IconButton';
+import { deletePost } from '@api/post';
 
 class Detail extends Component {
   view() {

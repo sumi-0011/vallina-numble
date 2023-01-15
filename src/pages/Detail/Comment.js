@@ -1,7 +1,7 @@
-import { deleteComment } from '../../api/comment';
-import XIcon from '../../components/icons/XIcon';
-import Component from '../../components/common/Component';
-import '../../css/comment.scss';
+import Component from '@core/Component';
+import XIcon from '@components/icons/XIcon';
+import { deleteComment } from '@api/comment';
+import '@css/comment.scss';
 
 class Comment extends Component {
   view() {

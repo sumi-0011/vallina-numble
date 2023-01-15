@@ -1,4 +1,4 @@
-import Component from '../common/Component';
+import Component from '@core/Component';
 
 const COLOR = '#454545';
 

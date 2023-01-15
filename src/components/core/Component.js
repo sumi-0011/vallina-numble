@@ -1,4 +1,4 @@
-import { routeChange } from '../../router';
+import { routeChange } from '@/router';
 
 function createElementFromHTML(htmlString) {
   var div = document.createElement('div');

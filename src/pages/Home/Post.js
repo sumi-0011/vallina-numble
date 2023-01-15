@@ -1,5 +1,5 @@
-import '../../css/post.scss';
-import Component from '../../components/common/Component';
+import Component from '@core/Component';
+import '@css/post.scss';
 
 class Post extends Component {
   view() {
