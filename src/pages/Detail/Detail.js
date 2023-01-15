@@ -1,10 +1,11 @@
 import Component from '@core/Component';
-import IconButton from '@pages/detail/IconButton';
+import EditIcon from '@components/icons/EditIcon';
+import RemoveIcon from '@components/icons/RemoveIcon';
 import { deletePost } from '@api/post';
 
 class Detail extends Component {
   view() {
-    const { title, postId, content, createdAt, image } = this.props.post;
+    const { title, content, createdAt, image } = this.props.post;
     console.log('createdAt: ', createdAt);
     const date = new Date(createdAt);
     return `
@@ -19,8 +20,8 @@ class Detail extends Component {
           </div>
           <div class="content">${content}</div>
           <div class="bottom">
-            <div class='edit-btn-wrapper'></div>
-            <div class='remove-btn-wrapper'></div>
+            <div class='edit-btn-wrapper  '></div>
+            <div class='remove-btn-wrapper '></div>
           </div>
         </div>
       </div>
@@ -28,32 +29,31 @@ class Detail extends Component {
   }
 
   mount() {
+    const $iconWrapper2 = this.querySelectorChild('.edit-btn-wrapper');
+    const $iconWrapper1 = this.querySelectorChild('.remove-btn-wrapper');
+
+    new EditIcon($iconWrapper2);
+    $iconWrapper2.addEventListener('click', () => {
+      this.handleEditPost();
+    });
+
+    new RemoveIcon($iconWrapper1);
+    $iconWrapper1.addEventListener('click', () => {
+      this.handleRemovePost();
+    });
+  }
+
+  handleEditPost() {
     const { postId } = this.props.post;
+    if (!postId) return;
 
-    const $iconWrapper2 = this.$target.querySelector(
-      '.bottom .edit-btn-wrapper',
-    );
-    const $iconWrapper1 = this.$target.querySelector(
-      '.bottom .remove-btn-wrapper',
-    );
-
-    new IconButton($iconWrapper2, {
-      icon: 'edit',
-      onClick: () => {
-        this.navigate(`/edit/${postId}`);
-      },
-    });
-
-    new IconButton($iconWrapper1, {
-      icon: 'remove',
-      onClick: () => {
-        this.handleRemovePost();
-      },
-    });
+    this.navigate(`/edit/${postId}`);
   }
 
   async handleRemovePost() {
     const { postId } = this.props.post;
+    if (!postId) return;
+
     try {
       await deletePost(postId);
 
