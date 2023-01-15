@@ -5,7 +5,6 @@ export const requestGET = async (url, options = {}) => {
     const response = await fetch(`${BASE_PATH}${url}`, options);
 
     const json = await response.json();
-    console.log('json: ', json);
     if (response.ok) {
       return json;
     }
@@ -31,7 +30,6 @@ export const requestPOST = async (url, body) => {
     });
 
     const json = await response.json();
-    console.log('json: ', json);
 
     if (response.ok) {
       return json;

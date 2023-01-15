@@ -1,4 +1,5 @@
 const BASE_PATH = 'https://api.unsplash.com';
+const PHOTO_TOKEN = import.meta.env.VITE_APP_PHOTO;
 
 const getRandomPhoto = async () => {
   try {
@@ -6,18 +7,16 @@ const getRandomPhoto = async () => {
 
     return data.urls.regular;
   } catch (error) {
-    console.log('error: ', error);
+    throw error;
   }
 };
-
-const token = 'KLRMYJSMFGdHYXudkGOSTJViYY7tS6axjnwUPhVmnoo';
 
 export const requestUnsplashGET = async (url) => {
   const response = await fetch(`${BASE_PATH}${url}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Client-ID ${token}`,
+      Authorization: `Client-ID ${PHOTO_TOKEN}`,
     },
   });
 

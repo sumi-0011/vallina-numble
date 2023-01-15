@@ -9,7 +9,7 @@ class Detail extends Component {
     const date = new Date(createdAt);
 
     return `
-      <div class="img">
+      <div class="detail__img">
         <img src="${image}" />
       </div>
       <div class="detail__wrapper">

@@ -34,6 +34,7 @@ class DetailPage extends Page {
 
     comments.map((comment) => {
       const $comment = document.createElement('div');
+      $comment.className = 'comment';
       this.querySelectorChild('.comment-list').appendChild($comment);
 
       new Comment($comment, {

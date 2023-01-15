@@ -57,7 +57,6 @@ const addPost = async (title, content, image) => {
 
 const editPost = async (postId, title, content, image) => {
   try {
-    // TODO : 변경하려는 필드만 으로 바꾸기
     const body = { title, content, image };
     cleanObj(body);
 
@@ -65,7 +64,8 @@ const editPost = async (postId, title, content, image) => {
 
     return data.post.postId;
   } catch (error) {
-    console.log('error: ', error);
+    alert(error);
+    throw error;
   }
 };
 

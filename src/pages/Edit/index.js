@@ -67,7 +67,11 @@ class Edit extends Page {
     const { postId, title, content, image } = this.state;
     if (!postId) return;
 
-    await editPost(postId, title, content, image);
+    try {
+      await editPost(postId, title, content, image);
+    } catch (error) {
+      throw error;
+    }
     this.navigate(`/post/${postId}`);
   }
 }
