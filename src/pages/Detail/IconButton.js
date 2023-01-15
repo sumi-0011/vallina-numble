@@ -1,6 +1,6 @@
-import EditIcon from '../../components/icons/EditIcon';
-import RemoveIcon from '../../components/icons/RemoveIcon';
-import Component from '../../components/common/Component';
+import Component from '@core/Component';
+import EditIcon from '@components/icons/EditIcon';
+import RemoveIcon from '@components/icons/RemoveIcon';
 
 class IconButton extends Component {
   view() {

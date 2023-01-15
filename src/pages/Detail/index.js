@@ -1,9 +1,9 @@
-import Comment from './Comment';
-import Detail from './Detail';
-import { getPost } from '../../api/post';
-import CommentInput from './CommentInput';
-import Page from '../../components/common/Page';
-import '../../css/detail.scss';
+import Page from '@core/Page';
+import CommentInput from '@pages/detail/CommentInput';
+import Comment from '@pages/detail/Comment';
+import Detail from '@pages/detail/Detail';
+import { getPost } from '@api/post';
+import '@css/detail.scss';
 
 class DetailPage extends Page {
   init() {

@@ -1,5 +1,5 @@
-import Component from './common/Component';
-import BackIcon from './icons/BackIcon';
+import Component from '@core/Component';
+import BackIcon from '@components/icons/BackIcon';
 
 class Header extends Component {
   view() {

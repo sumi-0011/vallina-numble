@@ -1,5 +1,5 @@
-import Component from './common/Component';
-import '../css/button.scss';
+import Component from '@core/Component';
+import '@css/button.scss';
 
 class Button extends Component {
   view() {

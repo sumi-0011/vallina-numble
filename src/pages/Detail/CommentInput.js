@@ -1,6 +1,6 @@
-import { addComment } from '../../api/comment';
-import SendIcon from '../../components/icons/SendIcon';
-import Component from '../../components/common/Component';
+import Component from '@core/Component';
+import SendIcon from '@components/icons/SendIcon';
+import { addComment } from '@api/comment';
 
 class CommentInput extends Component {
   init() {

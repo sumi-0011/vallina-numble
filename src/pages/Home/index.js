@@ -1,8 +1,8 @@
-import { getPostList } from '../../api/post';
-import Button from '../../components/Button';
-import Post from './Post';
-import '../../css/home.scss';
-import Page from '../../components/common/Page';
+import Page from '@core/Page';
+import Post from '@pages/home/Post';
+import Button from '@components/Button';
+import { getPostList } from '@api/post';
+import '@css/home.scss';
 
 class Home extends Page {
   view() {

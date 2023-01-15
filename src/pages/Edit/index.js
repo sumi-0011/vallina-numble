@@ -1,12 +1,13 @@
-import { editPost, getPost } from '../../api/post';
-import Button from '../../components/Button';
-import Page from '../../components/common/Page';
+import Page from '@core/Page';
+import Button from '@components/Button';
+import { editPost, getPost } from '@api/post';
 
 class Edit extends Page {
   init() {
     this.setState({ title: '', content: '', image: null });
     this.fetchPost();
   }
+
   view() {
     const { title, content, image } = this.state;
 

@@ -1,9 +1,9 @@
-import { getRandomPhoto } from '../../api/photo';
-import { addPost } from '../../api/post';
-import GalleryIcon from '../../components/icons/GalleryIcon';
-import Button from '../../components/Button';
-import Page from '../../components/common/Page';
-import '../../css/new.scss';
+import { getRandomPhoto } from '@api/photo';
+import { addPost } from '@api/post';
+import GalleryIcon from '@components/icons/GalleryIcon';
+import Button from '@components/Button';
+import Page from '@core/Page';
+import '@css/new.scss';
 
 class Writing extends Page {
   init() {
@@ -25,7 +25,7 @@ class Writing extends Page {
           <textarea cols="30" rows="10" placeholder="내용을 입력해주세요." >${content}</textarea>
         </div>
       </div>
-      <div class='submit-btn'></div>
+      <div class='new__submit-btn'></div>
       `;
   }
 
@@ -51,7 +51,7 @@ class Writing extends Page {
       });
     }
 
-    new Button(this.querySelectorChild('.submit-btn'), {
+    new Button(this.querySelectorChild('.new__submit-btn'), {
       name: loading ? '로딩중' : '등록하기',
       onClick: this.handleSubmit.bind(this),
       className: 'basic',

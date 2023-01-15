@@ -1,9 +1,9 @@
-import Home from './pages/Home';
-import DetailPage from './pages/Detail';
-import WritingPage from './pages/Writing';
-import { init } from './router';
-import Edit from './pages/Edit';
-import Header from './components/Header';
+import Home from '@pages/home';
+import DetailPage from '@pages/detail';
+import WritingPage from '@pages/writing';
+import { init } from '@/router';
+import Edit from '@pages/edit';
+import Header from '@components/Header';
 
 class App {
   $target;
