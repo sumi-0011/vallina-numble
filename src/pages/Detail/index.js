@@ -4,15 +4,17 @@ import Comment from '@pages/detail/Comment';
 import Detail from '@pages/detail/Detail';
 import { getPost } from '@api/post';
 import '@css/detail.scss';
+import '@css/comment.scss';
 
 class DetailPage extends Page {
   init() {
     this.fetchPost();
+    this.setTitle('detail-page');
   }
 
   view() {
     return `
-      <div class="detail-wrapper"></div>
+      <div class="detail"></div>
       <hr/>
       <div class="comment-list"></div>
       <div class="comment-input-wrapper"></div>
@@ -21,10 +23,11 @@ class DetailPage extends Page {
 
   mount() {
     if (!this.props?.postId || !this.state?.post?.postId) return;
+
     const { post, comments } = this.state;
     const { postId } = this.props;
 
-    new Detail(this.$target.querySelector('.detail-wrapper'), {
+    new Detail(this.$target.querySelector('.detail'), {
       postId,
       post,
     });
@@ -32,6 +35,7 @@ class DetailPage extends Page {
     comments.map((comment) => {
       const $comment = document.createElement('div');
       this.querySelectorChild('.comment-list').appendChild($comment);
+
       new Comment($comment, {
         comment,
         refetch: this.fetchPost.bind(this),
@@ -56,7 +60,7 @@ class DetailPage extends Page {
       } else {
         alert(error);
       }
-      // this.navigate('/');
+      this.navigate('/');
     }
   }
 }

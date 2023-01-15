@@ -3,10 +3,10 @@ import '@css/post.scss';
 
 class Post extends Component {
   view() {
-    const { postId, image, title, content } = this.props.post;
+    const { image, title, content } = this.props.post;
 
     return `
-      <div class="post" data-id="${postId}">
+      <div class="post">
         <div class="post__img">
           <img src="${image}" />
         </div>
@@ -18,8 +18,9 @@ class Post extends Component {
   }
 
   mount() {
+    const { postId } = this.props.post;
+
     this.$target.addEventListener('click', () => {
-      const { postId } = this.props.post;
       this.navigate(`/post/${postId}`);
     });
   }

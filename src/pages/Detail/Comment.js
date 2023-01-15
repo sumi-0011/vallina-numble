@@ -1,13 +1,12 @@
 import Component from '@core/Component';
 import XIcon from '@components/icons/XIcon';
 import { deleteComment } from '@api/comment';
-import '@css/comment.scss';
 
 class Comment extends Component {
   view() {
-    const { commentId, postId, content } = this.props.comment;
+    const { content } = this.props.comment;
     return `
-      <div class="comment" data-id="${commentId}" data-post-id="${postId}">
+      <div class="comment">
         <div class="content">${content}</div>
         <button class="delete-btn"></button>
       </div>
@@ -19,11 +18,11 @@ class Comment extends Component {
 
     this.querySelectorChild(`.delete-btn`).addEventListener(
       'click',
-      this.handleDeleteComment.bind(this),
+      this.handleCommentDelete.bind(this),
     );
   }
 
-  async handleDeleteComment() {
+  async handleCommentDelete() {
     if (!this.props.comment.commentId) return;
 
     const { comment, refetch } = this.props;
@@ -31,6 +30,8 @@ class Comment extends Component {
     try {
       await deleteComment(comment.commentId);
       await refetch();
+
+      alert('삭제되었습니다.');
     } catch (error) {
       alert(error);
     }
