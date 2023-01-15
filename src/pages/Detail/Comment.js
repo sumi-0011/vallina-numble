@@ -6,17 +6,15 @@ class Comment extends Component {
   view() {
     const { content } = this.props.comment;
     return `
-      <div class="comment">
-        <div class="content">${content}</div>
-        <button class="delete-btn"></button>
-      </div>
+      <div class="comment__content">${content}</div>
+      <button class="comment__delete-btn"></button>
     `;
   }
 
   mount() {
-    new XIcon(this.querySelectorChild(`.delete-btn`));
+    new XIcon(this.querySelectorChild(`.comment__delete-btn`));
 
-    this.querySelectorChild(`.delete-btn`).addEventListener(
+    this.querySelectorChild(`.comment__delete-btn`).addEventListener(
       'click',
       this.handleCommentDelete.bind(this),
     );

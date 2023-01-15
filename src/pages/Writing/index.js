@@ -74,7 +74,6 @@ class Writing extends Page {
   }
 
   handleDeleteBtn() {
-    console.log('delete');
     this.setState({ img: null });
   }
 

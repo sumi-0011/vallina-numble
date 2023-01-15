@@ -22,13 +22,15 @@ class Home extends Page {
       return;
     }
 
+    const { posts } = this.state;
+
     new Button(this.querySelectorChild('.button-container'), {
       name: '새 글 작성하기',
       className: 'basic',
       onClick: () => this.navigate('/write'),
     });
 
-    this.state.posts.map((post) => {
+    posts.map((post) => {
       const $post = document.createElement('div');
       $post.className = 'post-wrapper';
       this.querySelectorChild('.post-list').appendChild($post);
@@ -39,7 +41,7 @@ class Home extends Page {
 
   async fetchPosts() {
     const { posts } = await getPostList();
-    this.setState({ posts: posts });
+    this.setState({ posts });
   }
 }
 

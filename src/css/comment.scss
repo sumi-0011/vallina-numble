@@ -30,7 +30,7 @@
   justify-content: space-between;
   gap: 12px;
 
-  .content {
+  &__content {
     font-weight: 400;
     font-size: 14px;
     line-height: 15px;
@@ -38,7 +38,7 @@
     color: #454545;
   }
 
-  .delete-btn {
+  &__delete-btn {
     display: flex;
     align-items: center;
     justify-content: center;
