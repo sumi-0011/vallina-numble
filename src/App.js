@@ -7,6 +7,7 @@ import Header from '@components/Header';
 
 class App {
   $target;
+
   constructor({ $target }) {
     this.$target = $target;
     init(this.route.bind(this));
@@ -18,12 +19,13 @@ class App {
     const { pathname } = location;
 
     this.$target.innerHTML = ` 
-        <header class='header'></header>
-        <div class='content'></div>
-   `;
+      <header class='header'></header>
+      <div class='content'></div>
+    `;
 
     const $content = this.$target.querySelector('.content');
     const $header = this.$target.querySelector('.header');
+
     new Header($header);
 
     if (pathname === '/') {
