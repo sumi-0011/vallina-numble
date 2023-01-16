@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cd5eba6c-a8ef-44ad-bea8-96cb5bd16474/deploy-status)](https://app.netlify.com/sites/hpny-2023/deploys)
+
 ### 백엔드 api 연결
 
 ### post

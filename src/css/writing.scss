@@ -2,15 +2,14 @@
 
 .writing {
   @include form;
-
-  .delete-btn {
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: fit-content;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
+}
+.delete-btn {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: fit-content;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
