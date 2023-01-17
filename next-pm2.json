@@ -1,0 +1,23 @@
+{
+  "script": "yarn",
+  "name": "next",
+  "filter_env": [],
+  "namespace": "default",
+  "args": [
+    "start"
+  ],
+  "env": {},
+  "instances": 0,
+  "merge_logs": true,
+  "vizion": true,
+  "autorestart": true,
+  "watch": false,
+  "instance_var": "NODE_APP_INSTANCE",
+  "pmx": true,
+  "automation": true,
+  "treekill": true,
+  "username": "sumi",
+  "windowsHide": true,
+  "kill_retry_time": 100,
+  "write": true
+}
