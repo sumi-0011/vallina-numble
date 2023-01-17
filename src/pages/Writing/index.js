@@ -9,7 +9,7 @@ import '@css/writing.scss';
 class Writing extends Page {
   init() {
     this.setState({ title: '', content: '', img: null });
-    this.setTitle('writing-page');
+    this.setTitle(`HPNY 글 작성`);
   }
 
   setState(nextState) {

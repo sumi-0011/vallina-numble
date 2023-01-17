@@ -6,7 +6,7 @@ import '@css/edit.scss';
 class Edit extends Page {
   init() {
     this.setState({ title: '', content: '', image: null });
-    this.setTitle('edit-page');
+    this.setTitle(`HPNY 글 수정`);
     this.fetchPost();
   }
 
