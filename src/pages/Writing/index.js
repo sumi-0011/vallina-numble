@@ -12,6 +12,10 @@ class Writing extends Page {
     this.setTitle('writing-page');
   }
 
+  setState(nextState) {
+    this.state = { ...this.state, ...nextState };
+  }
+
   view() {
     const { title, content } = this.state;
     return ` 
@@ -71,11 +75,13 @@ class Writing extends Page {
 
   handleDeleteBtn() {
     this.setState({ img: null });
+    this.render();
   }
 
   async getPhoto() {
     const imgUrl = await getRandomPhoto();
     this.setState({ img: imgUrl });
+    this.render();
   }
 
   async handleSubmit() {
@@ -89,6 +95,7 @@ class Writing extends Page {
       alert(error.message);
     } finally {
       this.setState({ loading: false });
+      this.render();
     }
   }
 }
