@@ -8,8 +8,10 @@ import '@css/comment.scss';
 
 class DetailPage extends Page {
   init() {
+    const { postId } = this.props;
+    this.setTitle(`HPNY 상세 ${postId ?? ''}`);
+
     this.fetchPost();
-    this.setTitle('detail-page');
   }
 
   view() {

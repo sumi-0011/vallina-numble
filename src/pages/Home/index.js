@@ -7,7 +7,7 @@ import '@css/home.scss';
 class Home extends Page {
   init() {
     this.fetchPosts();
-    this.setTitle('home');
+    this.setTitle(`HPNY HOME`);
   }
 
   view() {
