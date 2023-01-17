@@ -10,6 +10,10 @@ class Edit extends Page {
     this.fetchPost();
   }
 
+  setState(nextState) {
+    this.state = { ...this.state, ...nextState };
+  }
+
   view() {
     const { title, content, image } = this.state;
 
@@ -65,6 +69,8 @@ class Edit extends Page {
     } catch (error) {
       alert(error);
     }
+
+    this.render();
   }
 
   async handleSubmit() {
